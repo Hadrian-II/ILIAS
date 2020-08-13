@@ -149,7 +149,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array( Component\Popover\Standard::class, Component\Popover\Listing::class );
     }

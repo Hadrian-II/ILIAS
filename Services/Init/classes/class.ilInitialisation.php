@@ -67,7 +67,7 @@ class ilInitialisation
             )
         );
     }
-    
+
     /**
      * get common include code files
      */
@@ -77,17 +77,17 @@ class ilInitialisation
         if (ilContext::usesTemplate()) {
             require_once "./Services/UICore/classes/class.ilTemplate.php";
         }
-                
+
         // really always required?
         require_once "./Services/Utilities/classes/class.ilUtil.php";
         require_once "./Services/Calendar/classes/class.ilDatePresentation.php";
         require_once "include/inc.ilias_version.php";
-        
+
         include_once './Services/Authentication/classes/class.ilAuthUtils.php';
-        
+
         self::initGlobal("ilBench", "ilBenchmark", "./Services/Utilities/classes/class.ilBenchmark.php");
     }
-    
+
     /**
      * This is a hack for  authentication.
      *
@@ -1582,34 +1582,12 @@ class ilInitialisation
             );
         };
         $c["ui.component_renderer_loader"] = function ($c) {
-            return new ILIAS\UI\Implementation\Render\LoaderCachingWrapper(
-                new ILIAS\UI\Implementation\Render\LoaderResourceRegistryWrapper(
-                    $c["ui.resource_registry"],
-                    new ILIAS\UI\Implementation\Render\FSLoader(
-                        new ILIAS\UI\Implementation\Render\DefaultRendererFactory(
-                            $c["ui.factory"],
-                            $c["ui.template_factory"],
-                            $c["lng"],
-                            $c["ui.javascript_binding"],
-                            $c["refinery"]
-                        ),
-                        new ILIAS\UI\Implementation\Component\Symbol\Glyph\GlyphRendererFactory(
-                            $c["ui.factory"],
-                            $c["ui.template_factory"],
-                            $c["lng"],
-                            $c["ui.javascript_binding"],
-                            $c["refinery"]
-
-                        ),
-                        new ILIAS\UI\Implementation\Component\Input\Field\FieldRendererFactory(
-                            $c["ui.factory"],
-                            $c["ui.template_factory"],
-                            $c["lng"],
-                            $c["ui.javascript_binding"],
-                            $c["refinery"]
-                        )
-                    )
-                )
+           return new ILIAS\UI\Implementation\Render\MappedRendererLoader(
+                $c["ui.factory"],
+                $c["ui.template_factory"],
+                $c["lng"],
+                $c["ui.javascript_binding"],
+                $c["refinery"]
             );
         };
         $c["ui.template_factory"] = function ($c) {

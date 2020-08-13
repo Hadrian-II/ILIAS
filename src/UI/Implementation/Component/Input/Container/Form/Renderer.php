@@ -52,7 +52,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(
             Component\Input\Container\Form\Standard::class,

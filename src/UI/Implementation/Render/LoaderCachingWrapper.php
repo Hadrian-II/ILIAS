@@ -61,4 +61,7 @@ class LoaderCachingWrapper implements Loader
     {
         return $this->loader->getRendererFactoryFor($component);
     }
+
+    public function registerRenderer(string $renderer_class)
+    {}
 }

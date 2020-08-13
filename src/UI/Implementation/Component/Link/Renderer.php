@@ -69,7 +69,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return [
             Component\Link\Standard::class,

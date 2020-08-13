@@ -114,7 +114,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName() : array
+    public function getComponentInterfaceName() : array
     {
         return array(C\Panel\Secondary\Listing::class, C\Panel\Secondary\Secondary::class);
     }

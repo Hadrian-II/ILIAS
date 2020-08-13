@@ -34,7 +34,7 @@ class Renderer extends AbstractComponentRenderer
         return $str;
     }
 
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(
             Component\Symbol\Avatar\Letter::class,

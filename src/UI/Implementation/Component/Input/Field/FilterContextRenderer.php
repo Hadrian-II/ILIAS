@@ -356,7 +356,7 @@ class FilterContextRenderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return [
             Component\Input\Field\Text::class,

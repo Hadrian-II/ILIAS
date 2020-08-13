@@ -31,7 +31,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(
             \ILIAS\UI\Component\Dropzone\File\Standard::class,

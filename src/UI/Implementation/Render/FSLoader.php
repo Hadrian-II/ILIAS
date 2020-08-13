@@ -69,4 +69,7 @@ class FSLoader implements Loader
         }
         return $this->default_renderer_factory;
     }
+
+    public function registerRenderer(string $renderer_class)
+    {}
 }

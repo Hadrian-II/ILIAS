@@ -238,7 +238,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdocs
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return [Component\Chart\ProgressMeter\ProgressMeter::class];
     }

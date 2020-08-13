@@ -57,7 +57,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(Component\Symbol\Icon\Icon::class);
     }

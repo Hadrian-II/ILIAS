@@ -32,4 +32,13 @@ interface ComponentRenderer
      * @return	null
      */
     public function registerResources(ResourceRegistry $registry);
+
+    /**
+     * Get the name of the component-interface this renderer is supposed to render.
+     *
+     * ATTENTION: Fully qualified please!
+     *
+     * @return string[]
+     */
+    public function getComponentInterfaceName();
 }

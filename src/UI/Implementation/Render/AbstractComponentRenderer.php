@@ -302,7 +302,7 @@ abstract class AbstractComponentRenderer implements ComponentRenderer
      *
      * @return string[]
      */
-    abstract protected function getComponentInterfaceName();
+    abstract public function getComponentInterfaceName();
 
 
     private function getMyComponent()

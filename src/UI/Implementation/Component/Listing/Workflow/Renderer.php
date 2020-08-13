@@ -100,7 +100,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdocs
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return [
             Component\Listing\Workflow\Workflow::class

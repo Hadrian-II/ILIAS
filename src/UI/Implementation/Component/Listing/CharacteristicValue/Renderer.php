@@ -19,7 +19,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdocs
      */
-    protected function getComponentInterfaceName() : array
+    public function getComponentInterfaceName() : array
     {
         return [Text::class];
     }

@@ -108,4 +108,13 @@ class DefaultRenderer implements Renderer
     {
         return $this->contexts;
     }
+
+    /**
+     * {@inheritDoc}
+     * @see \ILIAS\UI\Renderer::registerComponentRenderer()
+     */
+    public function registerComponentRenderer(string $renderer_classname)
+    {
+        $this->component_renderer_loader->registerRenderer($renderer_classname);
+    }
 }

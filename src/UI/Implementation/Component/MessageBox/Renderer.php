@@ -56,7 +56,7 @@ class Renderer extends AbstractComponentRenderer
         return $tpl->get();
     }
 
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(Component\MessageBox\MessageBox::class);
     }

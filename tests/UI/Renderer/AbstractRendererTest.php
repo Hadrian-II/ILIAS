@@ -18,7 +18,7 @@ namespace ILIAS\UI\Implementation\Component\Symbol\Glyph {
         {
             return $this->getTemplate($a, $b, $c);
         }
-        protected function getComponentInterfaceName()
+        public function getComponentInterfaceName()
         {
             return "\\ILIAS\\UI\\Component\\Symbol\\Glyph\\Glyph";
         }
@@ -49,7 +49,7 @@ namespace ILIAS\UI\Implementation\Component\Counter {
         {
             return $this->getTemplate($a, $b, $c);
         }
-        protected function getComponentInterfaceName()
+        public function getComponentInterfaceName()
         {
             return "\\ILIAS\\UI\\Component\\Counter\\Counter";
         }

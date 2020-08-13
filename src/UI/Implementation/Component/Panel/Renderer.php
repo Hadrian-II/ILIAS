@@ -138,7 +138,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdocs
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return [Component\Panel\Panel::class];
     }

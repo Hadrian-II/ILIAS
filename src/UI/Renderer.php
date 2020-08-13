@@ -52,4 +52,11 @@ interface Renderer
      * @return Renderer
      */
     public function withAdditionalContext(Component $context);
+
+    /**
+     * Add Custom Component renderer by fully qualified Classname
+     *
+     * @param string $renderer_classname
+     */
+    public function registerComponentRenderer(string $renderer_classname);
 }

@@ -297,7 +297,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdoc
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(Component\Button\Primary::class
         , Component\Button\Standard::class

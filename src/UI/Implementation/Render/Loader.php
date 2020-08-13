@@ -28,4 +28,11 @@ interface Loader
      * @return	RendererFactory
      */
     public function getRendererFactoryFor(Component $component);
+
+    /**
+     * Registers renderer to the Loader
+     *
+     * @param string $renderer_class
+     */
+    public function registerRenderer(string $renderer_class);
 }

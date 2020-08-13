@@ -87,7 +87,7 @@ class Renderer extends AbstractComponentRenderer
     /**
      * @inheritdocs
      */
-    protected function getComponentInterfaceName()
+    public function getComponentInterfaceName()
     {
         return array(Component\Symbol\Glyph\Glyph::class);
     }
