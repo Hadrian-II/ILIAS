@@ -162,17 +162,16 @@ class Renderer extends AbstractComponentRenderer
         $tpl = $this->getTemplate("tpl.mainbar.html", true, true);
 
         $tpl->setVariable("ARIA_LABEL", $this->txt('mainbar_aria_label'));
-
+        $more_btn_label = $this->txt('mainbar_more_label');
         //add "more"-slate
         $more_slate = $f->maincontrols()->slate()->combined(
-            $component->getMoreButton()->getLabel(),
+            $more_btn_label,
             $f->symbol()->glyph()->more()
         )->withAriaRole(ISlate::MENU);
         $component = $component->withAdditionalEntry(
             '_mb_more_entry',
             $more_slate
         );
-
         $component = $this->calculateMainBarTreePosition("0", $component);
 
         $mb_entries = [
@@ -362,9 +361,18 @@ class Renderer extends AbstractComponentRenderer
     {
         $tpl = $this->getTemplate("tpl.footer.html", true, true);
         $links = $component->getLinks();
+        $modalsWithTriggers = $component->getModals();
+        $links = array_merge($links, array_column($modalsWithTriggers, 1));
+
         if ($links) {
             $link_list = $this->getUIFactory()->listing()->unordered($links);
             $tpl->setVariable('LINKS', $default_renderer->render($link_list));
+        }
+
+        if ($modalsWithTriggers !== []) {
+            $tpl->setVariable('MODALS', $default_renderer->render(
+                array_column($modalsWithTriggers, 0)
+            ));
         }
 
         $tpl->setVariable('TEXT', $component->getText());

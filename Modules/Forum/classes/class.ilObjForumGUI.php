@@ -881,6 +881,7 @@ class ilObjForumGUI extends \ilObjectGUI implements \ilDesktopItemHandling
                 $tpl->setVariable('DRAFT_ANCHOR', 'draft_' . $draft->getDraftId());
 
                 $tpl->setVariable('USR_IMAGE', $authorinfo->getProfilePicture());
+                $tpl->setVariable('USR_ICON_ALT', ilUtil::prepareFormOutput($authorinfo->getAuthorShortName()));
                 if ($authorinfo->getAuthor()->getId() && ilForum::_isModerator(
                     (int) $_GET['ref_id'],
                     $draft->getPostAuthorId()
@@ -1094,16 +1095,19 @@ class ilObjForumGUI extends \ilObjectGUI implements \ilDesktopItemHandling
         $this->ctrl->clearParameters($this);
 
         if ($authorinfo->hasSuffix()) {
+            if (!$authorinfo->isDeleted()) {
+                $tpl->setVariable('USR_NAME', $authorinfo->getAlias());
+            }
             $tpl->setVariable('AUTHOR', $authorinfo->getSuffix());
-            $tpl->setVariable('USR_NAME', $node->getUserAlias());
         } else {
-            $tpl->setVariable('AUTHOR', $authorinfo->getLinkedAuthorShortName());
             if ($authorinfo->getAuthorName(true) && !$this->objProperties->isAnonymized()) {
                 $tpl->setVariable('USR_NAME', $authorinfo->getAuthorName(true));
             }
+            $tpl->setVariable('AUTHOR', $authorinfo->getLinkedAuthorShortName());
         }
 
         $tpl->setVariable('USR_IMAGE', $authorinfo->getProfilePicture());
+        $tpl->setVariable('USR_ICON_ALT', ilUtil::prepareFormOutput($authorinfo->getAuthorShortName()));
         $isModerator = ilForum::_isModerator((int) $authorinfo->getAuthor()->getId(), $node->getPosAuthorId());
         if ($authorinfo->getAuthor()->getId() && $isModerator) {
             $authorRole = $this->lng->txt('frm_moderator_n');
@@ -1394,19 +1398,24 @@ class ilObjForumGUI extends \ilObjectGUI implements \ilDesktopItemHandling
                     }
 
                     if (isset($new_ref_id) && $new_ref_id != $a_target) {
-                        ilUtil::redirect(ILIAS_HTTP_PATH . "/goto.php?target=frm_" . $new_ref_id . "_" . $a_thread . "_" . $a_posting);
+                        $DIC->ctrl()->redirectToURL(
+                            ILIAS_HTTP_PATH . '/goto.php?target=frm_' . $new_ref_id . '_' . $a_thread . '_' . $a_posting
+                        );
                     }
                 }
 
-                $_GET['ref_id'] = $a_target;
-                $_GET['pos_pk'] = $a_posting;
-                $_GET['thr_pk'] = $a_thread;
-                $_GET['anchor'] = $a_posting;
-                $_GET['cmdClass'] = 'ilObjForumGUI';
-                $_GET['cmd'] = 'viewThread';
-                $_GET['baseClass'] = 'ilRepositoryGUI';
-                include_once('ilias.php');
-                exit();
+                $DIC->ctrl()->setParameterByClass(ilObjForumGUI::class, 'ref_id', (int) $a_target);
+                if (is_numeric($a_thread)) {
+                    $DIC->ctrl()->setParameterByClass(ilObjForumGUI::class, 'thr_pk', (int) $a_thread);
+                }
+                if (is_numeric($a_posting)) {
+                    $DIC->ctrl()->setParameterByClass(ilObjForumGUI::class, 'pos_pk', (int) $a_posting);
+                }
+                $DIC->ctrl()->redirectByClass(
+                    [ilRepositoryGUI::class, self::class],
+                    'viewThread',
+                    is_numeric($a_posting) ? (int) $a_posting : ''
+                );
             } else {
                 $_GET['ref_id'] = $a_target;
                 $_GET['baseClass'] = 'ilRepositoryGUI';
@@ -5056,7 +5065,7 @@ class ilObjForumGUI extends \ilObjectGUI implements \ilDesktopItemHandling
                             $actions['reply_to_postings'] = $this->ctrl->getLinkTarget(
                                 $this,
                                 'viewThread',
-                                $node->getId()
+                                'reply_' . $node->getId()
                             );
                         }
 
@@ -5439,7 +5448,7 @@ class ilObjForumGUI extends \ilObjectGUI implements \ilDesktopItemHandling
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->getMessage());
         }
 
-        $tpl->setVariable('REPLY_ANKER', $this->objCurrentPost->getId());
+        $tpl->setVariable('REPLY_ANKER', 'reply_' .$this->objCurrentPost->getId());
         $oEditReplyForm = $this->getReplyEditForm();
         if ($action !== 'editdraft') {
             switch ($this->objProperties->getSubjectSetting()) {
