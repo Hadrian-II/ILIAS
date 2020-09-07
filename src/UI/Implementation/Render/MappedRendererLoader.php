@@ -88,6 +88,7 @@ class MappedRendererLoader implements Loader
         //search by interfaces
         foreach(class_implements($component_class) as $interface) {
             if (array_key_exists($interface, $this->mapping)) {
+                $this->mapping[$component_class] = $this->mapping[$interface];
                 return $this->createRenderer($this->mapping[$interface]);
             }
         }
@@ -95,6 +96,7 @@ class MappedRendererLoader implements Loader
         //search by parent classes
         while($component_class = get_parent_class($component_class)) {
             if (array_key_exists($component_class, $this->mapping)) {
+                $this->mapping[$component_class] = $this->mapping[$component_class];
                 return $this->createRenderer($this->mapping[$component_class]);
             }
         }
