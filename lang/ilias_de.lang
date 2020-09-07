@@ -1892,6 +1892,7 @@ auth#:#auth_account_migration_new#:#Neues Benutzerkonto anlegen
 auth#:#auth_info_add#:#Wählen Sie diese Einstellung, falls Sie sich noch nie für ILIAS registriert haben. In diesem Fall wird ein neues Benutzerkonto angelegt.
 auth#:#auth_info_migrate#:#Wenn Sie bereits ein ILIAS-Benutzerkonto besitzen, geben Sie bitte den Benutzernamen und das Passwort ein, um Ihre persönlichen Daten (Mails, Testergebnisse ...) zu übernehmen.
 auth#:#auth_login_editor#:#Loginseite gestalten
+auth#:#auth_oidc_login_element_info#:#Bei ILIAS anmelden über OpenID Connect
 auth#:#auth_oidc_role_info#:#OpenID Connect Attribut::Wert (zum Beispiel: "roles::Mitarbeitende").
 auth#:#auth_oidc#:#OpenId Connect
 auth#:#auth_oidc_mapping_table#:#Zuordnung von ILIAS-Benutzerdaten zu OpenId Connect Attributen
@@ -12459,6 +12460,7 @@ sess#:#sess_reg_max_members#:#Maximale Anzahl
 sess#:#sess_reg_max_members_info#:#Ist die maximale Teilnehmeranzahl erreicht, ist eine Anmeldung nicht mehr möglich.
 sess#:#sess_reg_waiting_list#:#Warteliste
 sess#:#sess_section_reg#:#Anmeldung durch Benutzer
+sess#:#sess_setting_header_presentation#:#Darstellung
 assessment#:#save_and_next#:#Speichern und weiter
 sess#:#sess_users_added#:#Die Benutzer wurden für die Sitzung angemeldet.
 sess#:#sess_users_already_assigned#:#Die Benutzer sind bereits für die Sitzung angemeldet.
@@ -16182,7 +16184,6 @@ awrn#:#user_awrn_hide#:#Nicht anzeigen
 awrn#:#user_awrn_show#:#Anzeigen
 awrn#:#awrn_user_show#:#Mein Status in "Wer ist online?" anzeigen
 ui#:#ui_error_in_group#:#Es gibt einen Fehler in diesem Bereich.
-<<<<<<< HEAD
 survey#:#survey_calculate_sum_score#:#Skalenpunktesumme berechnen
 survey#:#survey_calculate_sum_score_info#:#Berechnet die Summe aller Skalenpunkt von Single Choice, Multiple Choice und Matrixfragen je Teilnehmer. Achtung: Wenn Teilnehmer solche Fragen überspringen, wird die gesammte Skalenpunktesumme nicht berechnet.
 survey#:#svy_sum_score#:#Skalenpunktesumme

@@ -5,13 +5,23 @@
 namespace ILIAS\Tests\Setup\CLI;
 
 use ILIAS\Setup;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use ILIAS\Refinery\Factory as Refinery;
 use ILIAS\Data\Factory as DataFactory;
 
-class UpdateCommandTest extends \PHPUnit\Framework\TestCase
+class UpdateCommandTest extends TestCase
 {
     public function testBasicFunctionality()
+    {
+        $this->basicFunctionality(false);
+    }
+
+    public function testBasicFunctionalityAlreadyAchieved()
+    {
+        $this->basicFunctionality(true);
+    }
+    public function basicFunctionality(bool $is_applicable) : void
     {
         $refinery = new Refinery($this->createMock(DataFactory::class), $this->createMock(\ilLanguage::class));
 
@@ -54,13 +64,13 @@ class UpdateCommandTest extends \PHPUnit\Framework\TestCase
             ->expects($this->never())
             ->method("getInstallObjective")
             ->with($config)
-            ->willReturn(new Setup\NullObjective());
+            ->willReturn(new Setup\Objective\NullObjective());
 
         $agent
             ->expects($this->never())
             ->method("getBuildArtifactObjective")
             ->with()
-            ->willReturn(new Setup\NullObjective());
+            ->willReturn(new Setup\Objective\NullObjective());
 
         $agent
             ->expects($this->once())
@@ -73,10 +83,23 @@ class UpdateCommandTest extends \PHPUnit\Framework\TestCase
             ->method("getPreconditions")
             ->willReturn([]);
 
+        $expects = $this->never();
+        $return = false;
+
+        if ($is_applicable) {
+            $expects = $this->once();
+            $return = true;
+        }
+
         $objective
-            ->expects($this->once())
+            ->expects($expects)
             ->method("achieve")
             ->willReturn($env);
+
+        $objective
+            ->expects($this->once())
+            ->method("isApplicable")
+            ->willReturn($return);
         
         $tester->execute([
             "config" => $config_file

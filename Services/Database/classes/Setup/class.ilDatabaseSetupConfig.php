@@ -160,14 +160,15 @@ class ilDatabaseSetupConfig implements Setup\Config
                     case "port":
                         return $this->config->getPort();
                     case "pass":
-                        return $this->config->getPassword()->toString();
+                        $pw = $this->config->getPassword();
+                        return $pw ? $pw->toString() : null;
                     case "name":
                         return $this->config->getDatabase();
                     case "type":
                         return $this->config->getType();
                     default:
                         throw new \LogicException(
-                            "Cannot provide variable '$a_varname'"
+                            "Cannot provide variable '$a_var_name'"
                         );
                 }
             }

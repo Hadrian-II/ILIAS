@@ -182,6 +182,7 @@ survey#:#svy_notification_tutor_results_info#:#After reaching the end data a cro
 survey#:#svy_notification_tutor_results_alert#:#This requires an end date.
 survey#:#survey_results_tutor_subject#:#Results for survey "%s"
 survey#:#survey_results_tutor_body#:#Attached you will find the detailed results for the following survey
+auth#:#auth_oidc_login_element_info#:#Login to ILIAS via OpenID Connect
 auth#:#auth_oidc_role_info#:#OpenID Connect Attribute::Value (e.g: "roles::employee").
 auth#:#auth_oidconnect#:#OpenID Connect
 auth#:#auth_oidc_settings_title#:#OpenID Connect Authentifizierung konfigurieren
@@ -12493,6 +12494,7 @@ sess#:#sess_reg_max_members_info#:#Define the maximum number of users that can p
 sess#:#sess_reg_waiting_list#:#Waiting List
 wiki#:#wiki_page_exists#:#Existing Page
 sess#:#sess_section_reg#:#Registration Settings
+sess#:#sess_setting_header_presentation#:#Presentation
 assessment#:#save_and_next#:#Save and Continue
 sess#:#sess_users_added#:#Registered selected users for the session.
 sess#:#sess_users_already_assigned#:#The user is already registered for this session.
@@ -16181,12 +16183,10 @@ awrn#:#user_awrn_hide#:#Hide my status
 awrn#:#user_awrn_show#:#Show my status
 awrn#:#awrn_user_show#:#Show your account in "Who-is-online?"
 ui#:#ui_error_in_group#:#There is some error in this part.
-<<<<<<< HEAD
 survey#:#survey_calculate_sum_score#:#Calculate Sum Score
 survey#:#survey_calculate_sum_score_info#:#Calculates the sum of all scale values for single choice, multiple choice and matrix questions for each participant. Caution: If participants skip these kind of questions, the whole sum score will not be calculated anymore.
 survey#:#svy_sum_score#:#Sum Score
 survey#:#svy_max_sum_score#:#Maximum Sum Score
 content#:#cont_select_none#:#Clear Selection
-feed#:#feed_no_local_url#:#The URL could not be verified. Please enter a valid external Feed URL.
 feed#:#feed_no_local_url#:#The URL could not be verified. Please enter a valid external Feed URL.
 common#:#mainbar_more_label#:#More
