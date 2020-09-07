@@ -10,7 +10,7 @@ use ILIAS\UI\Implementation\Render\ComponentRenderer;
  *
  * @package ILIAS\GlobalScreen\BootLoader
  */
-class ilUIBuildRendererMappingObjective extends Setup\BuildArtifactObjective
+class ilUIBuildRendererMappingObjective extends Setup\Artifact\BuildArtifactObjective
 {
     const ARTIFACT_PATH = 'src/UI/artifacts/core_renderers.php';
 
@@ -26,6 +26,6 @@ class ilUIBuildRendererMappingObjective extends Setup\BuildArtifactObjective
         $interface_finder = new Setup\ImplementationOfInterfaceFinder($interface_name);
         $class_names = iterator_to_array($interface_finder->getMatchingClassNames());
 
-        return new Setup\ArrayArtifact($class_names);
+        return new Setup\Artifact\ArrayArtifact($class_names);
     }
 }
