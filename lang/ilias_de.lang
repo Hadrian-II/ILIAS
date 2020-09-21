@@ -123,8 +123,8 @@ meta#:#meta_oer_harvester_desc#:#OER Harvester
 meta#:#meta_oer_target#:#Kategorie für OER-Freigaben
 meta#:#meta_oer_copyright_selection#:#Lizenzauswahl
 meta#:#meta_oer_copyright_selection_info#:#Nur Objekte, die unter den/der ausgewählten Lizenz veröffentlicht sind, werden in die OER-Kategorie verknüpft.
-meta#:#meta_oer_blocked#:#Ignored by OER Harvester
-meta#:#meta_oer_blocked_info#:#Will not be listed automatically as Open Educational Ressource (OER)
+meta#:#meta_oer_blocked#:#Wird vom OER-Harvester ignoriert
+meta#:#meta_oer_blocked_info#:#Wird nicht automatisch als Open Educational Ressource (OER) gelistet
 meta#:#meta_copyright_show_usages#:#Show usages
 meta#:#meta_copyright_sub_items#:#Sub Items
 meta#:#meta_copyright_outdated#:#Outdated
@@ -133,8 +133,8 @@ meta#:#meta_copyright_usage#:#Usage
 meta#:#meta_copyright_status#:#Status
 meta#:#meta_save_order#:#Save Order
 meta#:#meta_order#:#Order
-meta#:#meta_copyright_change_warning_title#:#Modification of Copyright Settings
-meta#:#meta_copyright_change_info#:#You are going to change the licence assigned to this content. This should only be done in accordance with the copyright owner. Please continue only if the new licence is not more restrictive than the one used before.
+meta#:#meta_copyright_change_warning_title#:#Änderung der Copyright-Einstellungen
+meta#:#meta_copyright_change_info#:#Sie wollen die Lizenz für dieses Objekt ändern. Dies sollte nur in Übereinstimmung mit dem Inhaber des Urheberrechts erfolgen. Bitte fahren Sie nur fort, wenn die neue Lizenz nicht restriktiver ist als die zuvor verwendete.
 survey#:#svy_export_pdf#:#Export PDF
 survey#:#svy_notification_tutor_results#:#Eine E-Mail mit den Umfrageergebnissen
 survey#:#svy_notification_tutor_results_info#:#Nach dem Ablauf des Enddatum wird eine E-Mail mit den detailierten Umfrageergebnissen versendet.
@@ -1893,6 +1893,7 @@ auth#:#auth_info_add#:#Wählen Sie diese Einstellung, falls Sie sich noch nie f�
 auth#:#auth_info_migrate#:#Wenn Sie bereits ein ILIAS-Benutzerkonto besitzen, geben Sie bitte den Benutzernamen und das Passwort ein, um Ihre persönlichen Daten (Mails, Testergebnisse ...) zu übernehmen.
 auth#:#auth_login_editor#:#Loginseite gestalten
 auth#:#auth_oidc_login_element_info#:#Bei ILIAS anmelden über OpenID Connect
+sess#:#sess_title#:#Titel der Sitzung
 auth#:#auth_oidc_role_info#:#OpenID Connect Attribut::Wert (zum Beispiel: "roles::Mitarbeitende").
 auth#:#auth_oidc#:#OpenId Connect
 auth#:#auth_oidc_mapping_table#:#Zuordnung von ILIAS-Benutzerdaten zu OpenId Connect Attributen
@@ -6555,6 +6556,7 @@ forum#:#frm_moderators_not_exist_yet#:#Bitte wählen Sie einen Moderator aus.
 forum#:#frm_moderators_select_at_least_one#:#Bitte wählen Sie mindestens einen Moderator aus.
 forum#:#frm_moderators_select_one#:#Bitte wählen Sie einen Benutzer, dem Sie die Moderatorenrolle zuweisen möchten.
 forum#:#frm_post_not_activated_yet#:#Der Beitrag wurde noch nicht aktiviert.
+forum#:#frm_posts#:#Forenbeiträge
 forum#:#frm_pseudonym#:#Pseudonym
 forum#:#frm_purifier_not_implemented_for_type_x#:#Es ist noch kein Reiniger für den Typ %s implementiert.
 forum#:#frm_statistics#:#Statistik
