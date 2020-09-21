@@ -8,6 +8,7 @@ use ILIAS\UI\Implementation\Component\Signal;
 use ILIAS\UI\Implementation\Render\AbstractComponentRenderer;
 use ILIAS\UI\Renderer as RendererInterface;
 use ILIAS\UI\Component;
+use ILIAS\UI\Implementation\Component\Symbol\Glyph\ButtonContextRenderer;
 
 class Renderer extends AbstractComponentRenderer
 {
@@ -276,7 +277,12 @@ class Renderer extends AbstractComponentRenderer
 
     protected function additionalRenderBulky(Component\Button\Button $component, RendererInterface $default_renderer, $tpl)
     {
-        $renderer = $default_renderer->withAdditionalContext($component);
+        $renderer = new ButtonContextRenderer(
+            $this->getUIFactory(),
+            $this->getTemplateFactory(),
+            $this->getLanguage(),
+            $this->getJavascriptBinding(),
+            $this->getRefinery());
         $tpl->setVariable("ICON_OR_GLYPH", $renderer->render($component->getIconOrGlyph()));
         $label = $component->getLabel();
         if ($label !== null) {

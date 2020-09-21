@@ -10,6 +10,7 @@ use ILIAS\UI\Implementation\Render\AbstractComponentRenderer;
 use ILIAS\UI\Implementation\Render\Template;
 use ILIAS\UI\Renderer as RendererInterface;
 use ILIAS\UI\Component;
+use ILIAS\UI\Implementation\Component\Symbol\Glyph\ButtonContextRenderer;
 
 class Renderer extends AbstractComponentRenderer
 {
@@ -58,7 +59,12 @@ class Renderer extends AbstractComponentRenderer
     ) : string {
         $tpl_name = "tpl.bulky.html";
         $tpl = $this->setStandardVars($tpl_name, $component);
-        $renderer = $default_renderer->withAdditionalContext($component);
+        $renderer = new ButtonContextRenderer(
+            $this->getUIFactory(),
+            $this->getTemplateFactory(),
+            $this->getLanguage(),
+            $this->getJavascriptBinding(),
+            $this->getRefinery());
         $tpl->setVariable("SYMBOL", $renderer->render($component->getSymbol()));
 
         $id = $this->bindJavaScript($component);

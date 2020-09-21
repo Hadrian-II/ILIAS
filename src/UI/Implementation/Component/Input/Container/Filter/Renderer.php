@@ -10,6 +10,7 @@ use ILIAS\UI\Implementation\Component\SignalGenerator;
 use ILIAS\UI\Implementation\Render\AbstractComponentRenderer;
 use ILIAS\UI\Implementation\Render\Template;
 use ILIAS\UI\Renderer as RendererInterface;
+use ILIAS\UI\Implementation\Component\Input\Field\FilterContextRenderer;
 
 class Renderer extends AbstractComponentRenderer
 {
@@ -242,7 +243,12 @@ class Renderer extends AbstractComponentRenderer
 
         $input_group = $input_group->withOnUpdate($component->getUpdateSignal());
 
-        $renderer = $default_renderer->withAdditionalContext($component);
+        $renderer = new FilterContextRenderer(
+            $this->getUIFactory(),
+            $this->getTemplateFactory(),
+            $this->getLanguage(),
+            $this->getJavascriptBinding(),
+            $this->getRefinery());
         $tpl->setVariable("INPUTS", $renderer->render($input_group));
     }
 

@@ -93,6 +93,22 @@ abstract class AbstractComponentRenderer implements ComponentRenderer
     }
 
     /**
+     * @return \ilLanguage
+     */
+    final protected function getLanguage() : \ilLanguage
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @return TemplateFactory
+     */
+    final protected function getTemplateFactory() : TemplateFactory
+    {
+        return $this->tpl_factory;
+    }
+
+    /**
      * Get a text from the language file.
      *
      * @param	string	$id
