@@ -5,32 +5,11 @@
 use ILIAS\Setup;
 use ILIAS\DI;
 
-class ilDatabaseUpdatedObjective extends \ilDatabaseObjective
+class ilDatabaseUpdatedObjective implements Setup\Objective
 {
-    /**
-     * @var	ilDatabaseSetupConfig
-     */
-    protected $config;
-
-    /**
-     * @var	bool
-     */
-    protected $populate_before;
-
-    public function __construct(\ilDatabaseSetupConfig $config, bool $populate_before = false)
-    {
-        parent::__construct($config);
-        $this->populate_before = $populate_before;
-    }
-
     public function getHash() : string
     {
-        return hash("sha256", implode("-", [
-            self::class,
-            $this->config->getHost(),
-            $this->config->getPort(),
-            $this->config->getDatabase()
-        ]));
+        return hash("sha256", self::class);
     }
 
     public function getLabel() : string
@@ -45,16 +24,10 @@ class ilDatabaseUpdatedObjective extends \ilDatabaseObjective
 
     public function getPreconditions(Setup\Environment $environment) : array
     {
-        $common_config = $environment->getConfigFor("common");
-        if (!$this->populate_before) {
-            return [
-                new \ilIniFilesLoadedObjective($common_config),
-                new \ilDatabaseExistsObjective($this->config)
-            ];
-        }
         return [
-            new \ilIniFilesPopulatedObjective($common_config),
-            new \ilDatabasePopulatedObjective($this->config)
+            new Setup\Objective\ClientIdReadObjective(),
+            new ilIniFilesPopulatedObjective(),
+            new \ilDatabaseInitializedObjective()
         ];
     }
 
@@ -62,9 +35,9 @@ class ilDatabaseUpdatedObjective extends \ilDatabaseObjective
     {
         $db = $environment->getResource(Setup\Environment::RESOURCE_DATABASE);
         $io = $environment->getResource(Setup\Environment::RESOURCE_ADMIN_INTERACTION);
+        $ini = $environment->getResource(Setup\Environment::RESOURCE_ILIAS_INI);
         $client_ini = $environment->getResource(Setup\Environment::RESOURCE_CLIENT_INI);
-        $common_config = $environment->getConfigFor("common");
-        $filesystem_config = $environment->getConfigFor("filesystem");
+        $client_id = $environment->getResource(Setup\Environment::RESOURCE_CLIENT_ID);
 
         // ATTENTION: This is a total abomination. It only exists to allow the db-
         // update to run. This is a memento to the fact, that dependency injection
@@ -116,18 +89,27 @@ class ilDatabaseUpdatedObjective extends \ilDatabaseObjective
             {
             }
         };
-        define("CLIENT_DATA_DIR", $filesystem_config->getDataDir() . "/" . $common_config->getClientId());
-        define("CLIENT_WEB_DIR", $filesystem_config->getWebDir() . "/" . $common_config->getClientId());
+        if (!defined("CLIENT_DATA_DIR")) {
+            define("CLIENT_DATA_DIR", $ini->readVariable("clients", "datadir") . "/" . $client_id);
+        }
+        if (!defined("CLIENT_WEB_DIR")) {
+            define("CLIENT_WEB_DIR", dirname(__DIR__, 4) . "/data/" . $client_id);
+        }
         if (!defined("ILIAS_ABSOLUTE_PATH")) {
             define("ILIAS_ABSOLUTE_PATH", dirname(__FILE__, 5));
         }
         if (!defined("ILIAS_LOG_ENABLED")) {
             define("ILIAS_LOG_ENABLED", false);
         }
-        define("ROOT_FOLDER_ID", $client_ini->readVariable("system", "ROOT_FOLDER_ID"));
-        define("ROLE_FOLDER_ID", $client_ini->readVariable("system", "ROLE_FOLDER_ID"));
-        define("SYSTEM_FOLDER_ID", $client_ini->readVariable("system", "SYSTEM_FOLDER_ID"));
-
+        if (!defined("ROOT_FOLDER_ID")) {
+            define("ROOT_FOLDER_ID", $client_ini->readVariable("system", "ROOT_FOLDER_ID"));
+        }
+        if (!defined("ROLE_FOLDER_ID")) {
+            define("ROLE_FOLDER_ID", $client_ini->readVariable("system", "ROLE_FOLDER_ID"));
+        }
+        if (!defined("SYSTEM_FOLDER_ID")) {
+            define("SYSTEM_FOLDER_ID", $client_ini->readVariable("system", "SYSTEM_FOLDER_ID"));
+        }
 
         $db_update = new class($db, $client_ini) extends ilDBUpdate {
             public function loadXMLInfo()

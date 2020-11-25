@@ -1421,11 +1421,7 @@ class ilObjUser extends ilObject
         include_once "./Services/PersonalWorkspace/classes/class.ilWorkspaceTree.php";
         $tree = new ilWorkspaceTree($this->getId());
         $tree->cascadingDelete();
-        
-        // remove disk quota entries
-        include_once "./Services/DiskQuota/classes/class.ilDiskQuotaHandler.php";
-        ilDiskQuotaHandler::deleteByOwner($this->getId());
-        
+
         // remove reminder entries
         require_once 'Services/User/classes/class.ilCronDeleteInactiveUserReminderMail.php';
         ilCronDeleteInactiveUserReminderMail::removeSingleUserFromTable($this->getId());
@@ -2009,38 +2005,6 @@ class ilObjUser extends ilObject
         return $this->prefs["language"];
     }
 
-    /**
-    * Sets the minimal disk quota imposed by this user account.
-    *
-    * The minimal disk quota is specified in bytes.
-     *
-    * @access	public
-    * @param	integer
-    */
-    public function setDiskQuota($a_disk_quota)
-    {
-        $this->setPref("disk_quota", $a_disk_quota);
-    }
-
-    /**
-    * Returns the minimal disk quota imposed by this user account.
-    *
-    * The minimal disk quota is specified in bytes.
-    * The default value is 0.
-    *
-    * @access	public
-    * @return	integer
-    */
-    public function getDiskQuota()
-    {
-        return $this->prefs["disk_quota"] ? $this->prefs["disk_quota"] : 0;
-    }
-    
-    public function getPersonalWorkspaceDiskQuota()
-    {
-        return $this->prefs["wsp_disk_quota"] ? $this->prefs["wsp_disk_quota"] : 0;
-    }
-
     public function setLastPasswordChangeTS($a_last_password_change_ts)
     {
         $this->last_password_change_ts = $a_last_password_change_ts;
@@ -2245,7 +2209,6 @@ class ilObjUser extends ilObject
         return $this->approve_date;
     }
 
-    // BEGIN DiskQuota: show when user accepted user agreement
     /**
     * get the date when the user accepted the user agreement
     * @access   public
@@ -2265,7 +2228,6 @@ class ilObjUser extends ilObject
     {
         $this->agree_date = $a_str;
     }
-    // END DiskQuota: show when user accepted user agreement
 
     /**
     * set user active state and updates system fields appropriately
@@ -3783,7 +3745,8 @@ class ilObjUser extends ilObject
         $a_usr_id,
         $a_size = "small",
         $a_force_pic = false,
-        $a_prevent_no_photo_image = false
+        $a_prevent_no_photo_image = false,
+        $html_export = false
     ) {
         $define = new ilUserAvatarResolver((int) $a_usr_id);
         $define->setForcePicture($a_force_pic);

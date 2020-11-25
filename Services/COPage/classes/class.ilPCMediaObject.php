@@ -26,7 +26,17 @@ class ilPCMediaObject extends ilPageContent
      * @var \ILIAS\DI\UIServices
      */
     protected $ui;
-    
+
+    /**
+     * @var ilObjMediaObject
+     */
+    protected $mediaobject;
+
+    /**
+     * @var \ilLanguage
+     */
+    protected $lng;
+
     /**
     * Init page content component.
     */
@@ -37,6 +47,7 @@ class ilPCMediaObject extends ilPageContent
         $this->user = $DIC->user();
         $this->setType("media");
         $this->ui = $DIC->ui();
+        $this->lng = $DIC->language();
     }
 
     /**
@@ -89,7 +100,7 @@ class ilPCMediaObject extends ilPageContent
     *
     * @return	object	Media Object
     */
-    public function getMediaObject()
+    public function getMediaObject(): ilObjMediaObject
     {
         return $this->mediaobject;
     }
@@ -454,13 +465,16 @@ class ilPCMediaObject extends ilPageContent
         }
 
         // add fullscreen modals
+        $page = $this->getPage();
+        $suffix = "-".$page->getParentType()."-".$page->getId();
         $modal = $this->ui->factory()->modal()->roundtrip(
-            "Fullscreen",
-            $this->ui->factory()->legacy("<iframe id='il-copg-mob-fullscreen'></iframe>")
+            $this->lng->txt("cont_fullscreen"),
+            $this->ui->factory()->legacy("<iframe class='il-copg-mob-fullscreen' id='il-copg-mob-fullscreen".$suffix."'></iframe>")
         );
         $show_signal = $modal->getShowSignal();
-        return $a_html . $this->ui->renderer()->render($modal) . "<script>$(function () { il.COPagePres.setFullscreenModalShowSignal('" .
-            $show_signal . "'); });</script>";
+
+        return $a_html . "<div class='il-copg-mob-fullscreen-modal'>" . $this->ui->renderer()->render($modal) . "</div><script>$(function () { il.COPagePres.setFullscreenModalShowSignal('" .
+            $show_signal . "', '".$suffix."'); });</script>";
     }
 
     /**
@@ -482,4 +496,31 @@ class ilPCMediaObject extends ilPageContent
 
         return $js_files;
     }
+
+    /**
+     * @return ilMediaAliasItem
+     */
+    public function getStandardMediaAliasItem(): ilMediaAliasItem {
+        $std_alias_item = new ilMediaAliasItem(
+            $this->dom,
+            $this->getHierId(),
+            "Standard",
+            $this->getPcId()
+        );
+        return $std_alias_item;
+    }
+
+    /**
+     * @return ilMediaAliasItem
+     */
+    public function getFullscreenMediaAliasItem(): ilMediaAliasItem {
+        $std_alias_item = new ilMediaAliasItem(
+            $this->dom,
+            $this->getHierId(),
+            "Fullscreen",
+            $this->getPcId()
+        );
+        return $std_alias_item;
+    }
+
 }

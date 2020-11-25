@@ -26,15 +26,14 @@ class InstallCommandTest extends TestCase
     {
         $refinery = new Refinery($this->createMock(DataFactory::class), $this->createMock(\ilLanguage::class));
 
-        $agent = $this->createMock(Setup\Agent::class);
+        $agent = $this->createMock(Setup\AgentCollection::class);
         $config_reader = $this->createMock(Setup\CLI\ConfigReader::class);
-        $command = new Setup\CLI\InstallCommand(function () use ($agent) {
-            return $agent;
-        }, $config_reader, []);
+        $agent_finder = $this->createMock(Setup\AgentFinder::class);
+        $command = new Setup\CLI\InstallCommand($agent_finder, $config_reader, []);
 
         $tester = new CommandTester($command);
 
-        $config = $this->createMock(Setup\Config::class);
+        $config = $this->createMock(Setup\ConfigCollection::class);
         $config_file = "config_file";
         $config_file_content = ["config_file"];
 
@@ -52,10 +51,22 @@ class InstallCommandTest extends TestCase
             ->with($config_file, $config_overwrites)
             ->willReturn($config_file_content);
 
-        $agent
+        $config
             ->expects($this->once())
-            ->method("hasConfig")
-            ->willReturn(true);
+            ->method("getConfig")
+            ->with("common")
+            ->willReturn(new class implements Setup\Config {
+                public function getClientId() : string
+                {
+                    return "client_id";
+                }
+            });
+
+        $agent_finder
+            ->expects($this->once())
+            ->method("getAgents")
+            ->with()
+            ->willReturn($agent);
 
         $agent
             ->expects($this->once())
@@ -81,7 +92,7 @@ class InstallCommandTest extends TestCase
         $agent
             ->expects($this->once())
             ->method("getUpdateObjective")
-            ->with($config)
+            ->with()
             ->willReturn(new Setup\Objective\NullObjective());
 
         $objective

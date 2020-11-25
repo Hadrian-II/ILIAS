@@ -2451,9 +2451,11 @@ class ilObjectListGUI
     /**
     * insert all commands into html code
     *
-    * @access	private
-    * @param	object		$a_tpl		template object
-    * @param	int			$a_ref_id	item reference id
+	 * @param bool $a_use_asynch
+	 * @param bool $a_get_asynch_commands
+	 * @param string $a_asynch_url
+	 * @param bool $a_header_actions
+	 * @return string
     */
     public function insertCommands(
         $a_use_asynch = false,
@@ -2782,7 +2784,6 @@ class ilObjectListGUI
     public static function prepareJsLinks($a_redraw_url, $a_notes_url, $a_tags_url, $a_tpl = null)
     {
         global $DIC;
-
         $tpl = $DIC["tpl"];
         
         if (is_null($a_tpl)) {
@@ -3260,9 +3261,10 @@ class ilObjectListGUI
      */
     public function getTypeIcon()
     {
-        return ilObject::_getIcon(
-            $this->obj_id,
-            'small',
+        return ilObject::getIconForReference(
+            (int) $this->ref_id,
+            (int) $this->obj_id,
+            (string) 'small',
             $this->getIconImageType()
         );
     }

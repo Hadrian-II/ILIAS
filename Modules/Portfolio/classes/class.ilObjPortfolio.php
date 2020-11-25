@@ -201,13 +201,7 @@ class ilObjPortfolio extends ilObjPortfolioBase
     
     protected function handleQuotaUpdate()
     {
-        ilDiskQuotaHandler::handleUpdatedSourceObject(
-            $this->getType(),
-            $this->getId(),
-            ilUtil::dirsize($this->initStorage($this->getId())),
-            array($this->getId()),
-            true
-        );
+
     }
     
     public static function getAvailablePortfolioLinksForUserIds(array $a_owner_ids, $a_back_url = null)
@@ -230,4 +224,25 @@ class ilObjPortfolio extends ilObjPortfolioBase
         
         return $res;
     }
+
+    /**
+     * Is export possible
+     * @return bool
+     */
+    public function isCommentsExportPossible()
+    {
+        $setting = $this->setting;
+        $privacy = ilPrivacySettings::_getInstance();
+        if ($setting->get("disable_comments")) {
+            return false;
+        }
+        if (!ilNote::commentsActivated($this->id, 0, $this->getType())) {
+            return false;
+        }
+        if (!$privacy->enabledCommentsExport()) {
+            return false;
+        }
+        return true;
+    }
+
 }

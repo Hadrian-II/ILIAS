@@ -14,6 +14,18 @@
 // to the corresponding mode!
 // Language file names refer to ISO 639, see: http://www.oasis-open.org/cover/iso639a.html
 <!-- language file start -->
+meta#:#md_adv_field_list#:#Datenfelder
+meta#:#md_adv_record_lng_table#:#Sprachenverwaltung
+meta#:#md_adv_record_lng_table_lng#:#Sprache
+meta#:#md_adv_record_lng_table_default#:#Default
+meta#:#md_adv_record_lng_table_active#:#Aktiv
+meta#:#md_adv_record_lng_table_inst#:#Installiert
+meta#:#md_adv_record_activate_languages#:#Sprachen aktivieren
+meta#:#md_aria_language_selection#:#Sprachauswahl
+meta#:#md_adv_int_current#:#Aktuelle Sprache:
+meta#:#md_adv_int_default#:#Standardsprache:
+meta#:#md_adv_int_translation_info#:#Übersetzung:
+meta#:#md_adn_int_error_no_default#:#Bitte wählen Sie eine aktivierte Sprache als "Default-Sprache" aus.
 rbac#:#rbac_form_copy_roles_adjust_type#:#Typ der Rechteanpassung
 rbac#:#rbac_form_copy_roles_adjust_type_add#:#Rechte hinzufügen
 rbac#:#rbac_form_copy_roles_adjust_type_clone#:#Rechte kopieren
@@ -60,7 +72,6 @@ lhist#:#lhist_enable_learning_history_info#:#Aktiviert eine Übersicht aller Ler
 common#:#obj_prss_desc#:#Persönliche Ressourcen administrieren
 common#:#obj_prss#:#Persönliche Ressourcen
 pwsp#:#pwsp_enable_wsp_blogs#:#Blogs aktivieren
-pwsp#:#pwsp_enable_wsp_certificates#:#Zertifikate aktivieren
 pwsp#:#pwsp_enable_wsp_files#:#Dateien aktivieren
 pwsp#:#pwsp_enable_wsp_links#:#Links aktivieren
 dash#:#dash_main_panel#:#Hauptbereich
@@ -241,6 +252,10 @@ meta#:#meta_local#:#Lokal
 meta#:#udf_type_externallink#:#Externer Link
 meta#:#udf_type_internallink#:#Interner Link
 didactic#:#didactic_scope_list_header#:#Beschränkt auf:
+didactic#:#didactic_global#:#Global
+didactic#:#didactic_filter_with_icon#:#mit Symbol
+didactic#:#didactic_filter_without_icon#:#ohne Symbol
+didactic#:#didactic_local#:#Lokal
 meta#:#md_adv_scope_list_header#:#Beschränkt auf:
 didactic#:#didactic_scope#:#Gültigkeitsbereich
 sess#:#sess_mem_tbl_header#:#Sitzungsteilnehmer
@@ -275,8 +290,6 @@ forum#:#adm_autosave_drafts#:#Entwürfe automatisch speichern
 forum#:#adm_autosave_ival#:#Speicherintervall
 forum#:#adm_autosave_drafts_desc#:#Wenn aktiviert, werden Entwürfe während des Editierens automatisch gespeichert.
 forum#:#frm_task_publishing_draft_title#:#Veröffentlichen des Entwurfs "%s"
-common#:#pwsp_recalculate_disk_quota#:#Persönlicher Ressourcen: Neuberechnung Disk-Quota
-common#:#pwsp_recalculate_disk_quota_desc#:#Berechnet die Disk-Quota-Werte für die persönlichen Ressourcen neu.
 itgr#:#itgr_show_title#:#Titel anzeigen
 itgr#:#itgr_show_title_info#:#Der Titel des Objektblocks wird in der Präsentation für Lerner angezeigt.
 itgr#:#itgr_behaviour#:#Verhalten
@@ -859,7 +872,7 @@ assessment#:#tst_conflicting_setting#:#Diese Einstellung steht in Konflikt mit e
 assessment#:#enlarge#:#vergrößern
 assessment#:#enter_anonymous_code#:#Zugangsschlüssel für anonymen Zugang
 assessment#:#enter_enough_positive_points#:#Die maximale Punktezahl für die Frage muss größer als Null sein! Bitte geben Sie ausreichend viele nicht-negative Punkte für die Antworten ein.
-assessment#:#enter_enough_positive_points_checked#:#Mindestens eine Antwort muss Punkte erziehlen. Bitte geben Sie eine positive Punktezahl für das Auwählen einer Antwort ein.
+assessment#:#enter_enough_positive_points_checked#:#Mindestens eine Antwort muss Punkte erzielen. Bitte geben Sie eine positive Punktezahl für das Auswählen einer Antwort ein.
 assessment#:#err_no_numeric_value#:#Bitte geben Sie einen numerischen Wert ein
 assessment#:#error_importing_question#:#Beim Importieren der Frage(n) ist ein Fehler aufgetreten!
 assessment#:#error_open_image_file#:#Fehler beim Öffnen einer Bilddatei!
@@ -867,7 +880,7 @@ assessment#:#error_random_question_generation#:#Bei der Erzeugung von Zufallsfra
 assessment#:#errors#:#Fehler
 assessment#:#errors_section#:#Fehlerdaten
 assessment#:#errortext#:#Fehler/Worte markieren
-assessment#:#errortext_info#:#Bitte geben Sie einen Text ein. Um ein Wort als fehlerhaft zu markieren, setzen Sie bitte eine Raute (#) direkt vor das gewünschte Wort. Um eine Gruppe von Fehlerwörtern zu definieren, umklammern Sie die Wörter mit doppelten Klammern (z.B.: Dies ist ((ein Beispiel)) für mehrere Wörter). Wenn Sie auf die Schaltfläche &quot;Text analysieren&quot; klicken, werden die markierten Wörter für die weitere Bearbeitung extrahiert.
+assessment#:#errortext_info#:#Bitte geben Sie einen Text ein. Um ein Wort als fehlerhaft zu markieren, setzen Sie bitte eine Raute (#) direkt vor das gewünschte Wort. Um eine Gruppe von Fehlerwörtern zu definieren, umklammern Sie die Wörter mit doppelten Klammern und lassen in diesem Fall das Rautezeichen weg. Beispiel: Dies ist ((ein Beispiel)) für mehrere falsche Wörter. Wichtig: bei einer Gruppe von Fehlerwörtern muss jedes einzelne ausgewählt werden, um die für die Gruppe vorgesehene Punktzahl zu erzielen. Wenn Sie auf die Schaltfläche &quot;Text analysieren&quot; klicken, werden die markierten Wörter für die weitere Bearbeitung extrahiert.
 assessment#:#score_partsol_enabled#:#Halbpunktebewertung aktivieren
 assessment#:#score_partsol_enabled_info#:#Es hat sich als sinnvoll erwiesen, drei korrekte Antworten bereits mit der Hälfte der maximal erreichbaren Punktezahl zu honorieren. Bei weniger als drei korrekten Antworten werden keine Punkte vergeben.
 assessment#:#option_label#:#Optionsbezeichnungen
@@ -1034,7 +1047,7 @@ assessment#:#tst_skl_level_thresholds_link#:#Kompetenz-Schwellenwerte konfigurie
 assessment#:#tst_skl_res_interpretation_hint_msg#:#Beachten Sie, dass die Kompetenzergebnisse eines einzelnen Tests nur bedingt aussagekräftig sind. Je mehr Informationen zu den einzelnen Kompetenzen gesammelt werden, desto valider die Aussage. Sollten einzelne Kompetenzen keinen Eintrag erhalten haben, standen für diese Kompetenz zu wenig Informationen zur Verfügung.
 assessment#:#locked#:#gesperrt
 assessment#:#log_answer_changed_points#:#Manuelles Setzen der Punkte des Teilnehmers %s von %d auf %d Punkte durch %s
-assessment#:#log_wrong_test_password_entered#:#Teilnehmer hat falsches Testpasswort eingegeben. Eingabe: '%s'
+assessment#:#log_wrong_test_password_entered#:#Teilnehmer hat falsches Testpasswort eingegeben.
 assessment#:#log_could_not_enter_test_due_to_simultaneous_users#:#Der Teilnehmer konnte den Test nicht starten, da die maximale Anzahl der gleichzeitiger Teilnehmer für diesen Kurs bereits erreicht ist.
 assessment#:#log_create_new_test#:#Neuer Test erzeugt
 assessment#:#log_manual_feedback#:#%s hat eine manuelle Bewertung für den Teilnehmer %s und die Frage %s erstellt: %s
@@ -2041,6 +2054,9 @@ book#:#book_schedule_updated#:#Der Zeitplan wurde geändert.
 book#:#book_schedule_warning_edit#:#Es sind momentan keine Zeitpläne vorhanden. Um den Pool nutzen zu können, muss zuerst ein Zeitplan angelegt werden (oder der Typ des Buchungspools geändert werden).
 book#:#book_schedules#:#Zeitpläne
 book#:#book_set_cancel#:#Stornieren
+book#:#reservation_deleted#:#Reservierung gelöscht
+book#:#X_reservations_of#:#%s Reservierungen von
+book#:#book_set_delete#:#Löschen
 book#:#book_type_warning#:#Es sind momentan keine Buchungsobjekte vorhanden. Um den Pool nutzen zu können, müssen zuerst Buchungsobjekte angelegt werden.
 certificate#:#certificate_a4#:#A4 (297 mm x 210 mm)
 certificate#:#certificate_a4_landscape#:#A4 Quer (210 mm x 297 mm)
@@ -2350,6 +2366,26 @@ cntr#:#edit_questions#:#Fragen bearbeiten
 common#:#3rd_party_software#:#Drittanbieter-Software
 common#:#absolute_path#:#Absoluter Pfad
 common#:#accept_usr_agreement#:#Nutzungsvereinbarung akzeptieren?
+common#:#withdraw_consent_header#:#Einverständnis zur Nutzungsvereinbarung widerrufen
+common#:#withdraw_consent_description_internal#:#Bitte loggen Sie sich wieder ein um den Widerrufsvorgang abzuschließen.
+common#:#withdraw_consent_description_external#:#Bitte kehren Sie zu Ihrer Herkunftsinstallation zurück und loggen Sie sich erneut ein um den Widerrufsvorgang abzuschließen.
+common#:#withdraw_consent#:#Einverständnis widerrufen
+common#:#withdraw_consent_info_internal#:#Wenn Sie hier bestätigen wird Ihr Account gelöscht.
+common#:#withdraw_consent_info_external#:#Bitte benachrichtigen Sie den zuständigen Administrator Ihres Authorisierungssystem und teilen Sie Ihre Absicht mit.
+common#:#withdraw_consent_description#:#Widerrufen Sie hier die Zustimmung zu den Nutzungsvereinbarungen
+common#:#withdraw_consent_info#:#Widerrufen der Zustimmung zu den Nutzungsvereinbarungen
+common#:#withdraw_usr_agreement#:#Widerrufen
+common#:#accept_usr_agreement_btn#:#Zustimmen
+common#:#deny_usr_agreement#:#Nutzungsvereinbarung ablehnen?
+common#:#deny_usr_agreement_btn#:#Ablehnen
+common#:#withdrawal_complete#:#Widerrufsvorgang abgeschlossen.
+common#:#withdrawal_complete_deleted#:#Widerrufsvorgang abgeschlossen. Der Nutzeraccount wurde gelöscht.
+common#:#withdrawal_complete_redirect#:#Widerrufsvorgang abgeschlossen. Zur Löschung des Accounts bitte Kontakt zu Ihrer Organisation aufnehmen.
+common#:#withdrawal_mail_subject#:#Widerruf Einverständnis zu Nutzungsvereinbarungen
+common#:#withdrawal_sure_account_deletion#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten? Ihr Benutzerkonto wird in Folge dessen unwiderruflich gelöscht.
+common#:#withdrawal_sure_account#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten?
+common#:#withdrawal_mail_text#:#Sehr geehrte Damen und Herren,[BR][BR]hiermit widerrufe ich mein Einverständnis in die Nutzungsvereinbarungen Ihrer ILIAS Installation. Bitte leiten Sie die entsprechenden Maßnahmen ein.[BR][BR]Name: %1$s[BR]Benutzername: %2$s[BR]Externers Benutzerkonto: %3$s[BR][BR]Mit freundlichen Grüßen[BR]%1$s
+common#:#withdrawal_mail_info#:#Die folgende Nachricht wird in Ihrem Auftrag versandt, wenn Sie bestätigen:[BR][BR]
 common#:#access#:#Zugriff
 common#:#access_expired#:#abgelaufen
 common#:#access_free_granted#:#Unbeschränkten Zugriff für die ausgewählten Benutzer aktivieren.
@@ -2656,6 +2692,8 @@ common#:#chat_enter_public_room#:#Öffentl. Chat
 common#:#chat_enter_public_room_tooltip#:#In den öffentlichen Chatraum eintreten.
 common#:#chat_invite_public_room_tooltip#:#In den öffentlichen Chatraum einladen.
 chatroom#:#chat_settings#:#Chat-Einstellungen
+chatroom#:#chat_use_osc#:#Nutzt On-Screen-Chat
+chatroom#:#chat_not_use_osc#:#Nutzt On-Screen-Chat nicht
 common#:#chat_users_active#:#Aktive Benutzer
 common#:#check#:#Prüfen
 assessment#:#submit_and_check#:#Antwort speichern und Rückmeldung anfordern
@@ -2869,23 +2907,6 @@ common#:#disable_check#:#Nicht überprüfen
 common#:#disable_ext_lang_maint#:#Eweiterte Sprachenverwaltung deaktivieren
 common#:#disable_hide_user_toggle#:#Mitglied darf Benachrichtigung deaktivieren
 common#:#disabled#:#Ausgeschaltet
-common#:#disk_quota#:#Disk-Quota
-common#:#disk_quota_exceeded_headline#:#die folgenden Benutzer haben ihr Disk-Quota überschritten:
-common#:#disk_quota_is_1_by_2#:#Die effektive Disk-Quota ist %1$s aufgrund der Mitgliedschaft in Rolle "%2$s".
-common#:#disk_quota_is_1_instead_of_2_by_3#:#Die effektive Disk-Quota ist %1$s wie definiert in diesem Benutzerkonto. Die Disk-Quota durch Rollenzugehörigkeit wäre %2$s über Rolle "%3$s" gewesen.
-common#:#disk_quota_is_unlimited_by_1#:#Die effektive Disk-Quota ist unbegrenzt aufgrund Mitgliedschaft in Rolle "%1$s".
-common#:#disk_quota_last_reminder_sent#:#Letzte Quota-Erinnerung zugestellt
-common#:#disk_quota_last_reminder_sent_desc#:#Datum, an dem der Benutzer zum letzten Mal wegen Überschreitung der Disk-Quota eine Erinnerungsnachricht erhalten hat.
-common#:#disk_quota_on_role_desc#:#Die Disk-Quota einer Rolle wirkt sich auf alle Benutzerkonten aus, welche dieser Rolle zugeordnet sind.
-common#:#disk_quota_reminder_mail#:#Erinnerungsnachricht
-common#:#disk_quota_reminder_mail_desc#:#Die Disk-Quota Erinnerungsnachricht wird an alle aktiven Benutzer versandt, die Ihre Disk-Quota überschritten haben. Der Versand erfolgt einmal täglich. Benutzer die bereits eine Erinnerungsnachricht erhalten haben, erhalten diese alle 7 Tage erneut, bis dass ihre Disk-Quota wieder unterschritten wird.
-common#:#disk_quota_report#:#Disk-Quota-Bericht
-common#:#disk_quota_report_not_run_yet#:#Keine Disk-Quota-Berichte vorhanden. Der tägliche Cron-Job zur Ermittlung der Speicherverwendung muss zuerst ausgeführt werden.
-common#:#disk_quota_summary_rctp#:#Empfänger der Zusammenfassung
-common#:#disk_quota_summary_rctp_desc#:#Tragen Sie hier kommasepariert die Benutzernamen jener Personen ein, an die ILIAS täglich eine Zusammenfassung der überschrittenen Disk-Quotas senden soll.
-common#:#disk_quota_summary_subject#:#Zusammenfassung von überschrittenen Disk-Quotas
-common#:#disk_usage#:#Speicherverwendung
-common#:#disk_usage_details#:#Einzelheiten zur Speicherverwendung
 common#:#domain#:#Domäne
 common#:#down#:#Runter
 common#:#download#:#Download
@@ -2915,9 +2936,6 @@ common#:#enable_course_group_notifications#:#Tägliche Mail über Neuigkeiten au
 common#:#enable_course_group_notifications_desc#:#Bei Aktivierung können Teilnehmer eine Zusammenfassung der News abonnieren.
 common#:#enable_custom_icons#:#Anpassbare Symbole aktivieren
 common#:#enable_custom_icons_info#:#Damit können Sie eigene Symbole (Icons) für einzelne Container-Objekte und die Inhaltsseite definieren. Die entsprechenden Bilddateien laden Sie in den Eigenschaften der Objekte hoch.
-common#:#enable_disk_quota_reminder_mail#:#Sende Disk-Quota-Erinnerungsnachrichten
-common#:#enable_disk_quota_summary_mail#:#Sende Disk-Quota-Zusammenfassungen
-common#:#enable_disk_quota_summary_mail_desc#:#Durch das Aktivieren ist es möglich, bestimmten Benutzern eine tägliche Benachrichtigung über die überschrittenen Disk-Quotas zukommen zu lassen.
 common#:#enable_download_folder#:#«Herunterladen Aktion für Ordner» aktivieren
 common#:#enable_download_folder_info#:#Aktiviert eine Herunterladen-Option im Aktionen-Dropdown von Ordnern.
 common#:#enable_fora_statistics#:#Forenstatistik aktivieren
@@ -3070,7 +3088,6 @@ common#:#fill_out_all_required_fields#:#Bitte füllen Sie alle benötigten Felde
 common#:#filter#:#Filter:
 common#:#filter_users_with_access#:#Nur Benutzer mit Zugriff
 common#:#filter_users_with_disk_usage#:#Nur Benutzer die Speicherplatz belegen
-common#:#filter_users_with_exceeded_disk_quota#:#Nur Benutzer, die ihre Disk-Quota überschreiten
 common#:#filter_users_without_access#:#Nur Benutzer ohne Zugriff
 common#:#filter_users_without_disk_usage#:#Nur Benutzer die keinen Speicherplatz belegen
 common#:#first#:#An den Anfang
@@ -3843,8 +3860,10 @@ common#:#obj_tags#:#Tagging
 common#:#obj_tags_desc#:#Einstellungen für Tagging
 common#:#obj_tax#:#Taxonomie
 common#:#obj_taxf#:#Taxonomienordner
-common#:#obj_tool_setting_calendar#:#Kalender
-common#:#obj_tool_setting_calendar_info#:#Der Kalender ist aktiviert und der Block "Kalender" wird im Reiter "Inhalt" angezeigt.
+common#:#obj_tool_setting_calendar#:#Kalender-Block
+common#:#obj_tool_setting_calendar_info#:#Der Block "Kalender" wird im Reiter "Inhalt" angezeigt.
+common#:#obj_tool_setting_calendar_active#:#Kalender
+common#:#obj_tool_setting_calendar_active_info#:#Der Kalender ist aktiviert.
 common#:#obj_tool_setting_custom_metadata#:#Benutzerdefinierte Metadaten
 common#:#obj_tool_setting_custom_metadata_info#:#Wenn aktiviert können benutzerdefinierte Metadaten konfiguriert werden.
 common#:#obj_tool_setting_news#:#Neuigkeiten
@@ -4291,7 +4310,7 @@ common#:#shib_update#:#Dieses Feld bei jeder Anmeldung aktualisieren
 common#:#shib_user_default_role#:#Generelle Rolle für Shibboleth-Benutzer
 common#:#shib_zipcode#:#Attribut für Postleitzahl
 common#:#short_inst_name#:#Kurztitel
-common#:#short_inst_name_info#:#Dieser Titel erscheint in der Kopfzeile des Browsers. Wird hier nichts eingetragen, erscheint 'ILIAS'.
+common#:#short_inst_name_info#:#Dieser Text erscheint zusammen mit dem Seitentitel als Titel des Browser-Tabs. Wird hier nichts eingetragen, erscheint 'ILIAS'.
 common#:#show#:#Anzeigen
 common#:#show_details#:#Details anzeigen
 common#:#show_filter#:#Filter anzeigen
@@ -5296,8 +5315,7 @@ content#:#cont_scorm_ed_properties#:#Eigenschaften Lernmodul
 content#:#cont_scorm_type#:#adlcp:scormtype
 content#:#cont_screen_ids#:#Screen-IDs
 content#:#cont_second#:#Zweite
-content#:#cont_sel_el_copied_use_paste#:#Die ausgewählten Elemente wurden kopiert. Klicken Sie nun den gewünschte Zielplatzhalter und klicken Sie "Einfügen".
-content#:#cont_sel_el_cut_use_paste#:#Die ausgewählten Elemente wurden ausgeschnitten. Klicken Sie nun den gewünschte Zielplatzhalter und klicken Sie "Einfügen".
+content#:#cont_sel_el_use_paste#:#Die ausgewählten Elemente sind nun in der Zwischenablage. Klicken Sie nun den gewünschte Zielplatzhalter und klicken Sie "Einfügen".
 content#:#cont_select#:#Auswählen
 content#:#cont_select_file#:#Datei auswählen
 content#:#cont_select_from_upload_dir#:#-- Wählen Sie aus dem Upload-Verzeichnis --
@@ -5445,6 +5463,7 @@ content#:#glo_text_snippet_length_info#:#Anzahl der Zeichen, nach der Definition
 content#:#glo_usages#:#Glossar wird verwendet in...
 content#:#glo_used_in_scorm#:#Das Glossar wird vom SCORM-Modul verwendet. Wenn das Glossar gelöscht wird, können Verlinkungen zum Glossar nicht mehr aufgelöst werden.
 content#:#htlm_import#:#HTML-Lernmodul importieren
+content#:#lm_import#:#ILIAS-Lernmodul importieren
 content#:#import_sco_object#:#SCO importieren
 content#:#lm_menu_edit_entry#:#Menüeintrag bearbeiten
 content#:#lm_menu_entry_target#:#Ziel
@@ -5874,6 +5893,8 @@ crs#:#tutor_email#:#E-Mail
 crs#:#tutor_name#:#Name
 crs#:#tutor_phone#:#Telefon
 crs#:#user_fields#:#Benutzerdaten
+dateplaner#:#cal_app_other_materials_num#:#Weitere Materialien anzeigen
+dateplaner#:#cal_materials#:#Materialien
 dateplaner#:#add_appointment#:#Termin hinzufügen
 dateplaner#:#app_consultation_hours#:#Sprechstundenverwaltung
 dateplaner#:#app_day#:#Tag
@@ -5982,6 +6003,7 @@ dateplaner#:#cal_def_time_format_info#:#Bitte wählen Sie ein Format für die Ei
 dateplaner#:#cal_def_timezone#:#Default-Zeitzone
 dateplaner#:#cal_def_timezone_info#:#Bitte wählen Sie eine Zeitzone für die Anzeige von Terminen aus.
 dateplaner#:#cal_def_week_start#:#Default-Wochenbeginn
+dateplaner#:#cal_def_view#:#Default-Kalenderansicht
 dateplaner#:#cal_default_calendar#:#Persönliche Termine
 dateplaner#:#cal_del_app_sure#:#Sind Sie sicher, dass Sie die folgenden Termine löschen möchten?
 dateplaner#:#cal_del_cal_sure#:#Möchten Sie wirklich die ausgewählten Kalender löschen?
@@ -6011,6 +6033,7 @@ dateplaner#:#cal_grp_notification_sub#:#Terminänderung in Gruppe "%s"
 dateplaner#:#cal_in#:#im
 dateplaner#:#cal_last#:#Letzten
 dateplaner#:#cal_manage#:#Kalender verwalten
+dateplaner#:#cal_default_settings#:#Standardwerte
 dateplaner#:#cal_milestone_settings#:#Meilensteine
 dateplaner#:#cal_month_overview#:#Monatsübersicht
 dateplaner#:#cal_month_s#:#Monat(e)
@@ -6243,12 +6266,12 @@ ecs#:#ecs_field_time#:#Uhrzeit
 ecs#:#ecs_global_role_info#:#Bitte wählen Sie eine globale Rolle aus, der neue ECS-Benutzer zugeordnet werden.
 ecs#:#ecs_ignore_field#:#Dieses Feld nicht aktualisieren
 ecs#:#ecs_import#:#Externe Kurse
-ecs#:#ecs_import_cms#:#Campus Management
+ecs#:#ecs_import_cms#:#Campus-Management
 ecs#:#ecs_import_id_info#:#Bitte geben Sie die ID der Kategorie ein, in der neue ECS-Objekte angelegt werden sollen.
 ecs#:#ecs_import_id#:#Import-ID
 ecs#:#ecs_imported_content#:#Importierte Materialien
 ecs#:#ecs_imported_from#:#Importiert von
-ecs#:#ecs_invalid_import_type_cms#:#Sie können den Import-Typ "Campus Mamagment" nur für maximal einen Teilnehmer auswählen.
+ecs#:#ecs_invalid_import_type_cms#:#Sie können den Import-Typ "Campus-Management" nur für maximal einen Teilnehmer auswählen.
 ecs#:#ecs_key_password#:#Schlüsselpasswort
 ecs#:#ecs_local_settings#:#Lokale Einstellungen
 ecs#:#ecs_mapping_crs#:#Zuordnung für Kurse
@@ -7005,7 +7028,7 @@ mail#:#mail_system_sys_reply_to_addr#:#Reply-To
 mail#:#mail_system_sys_env_from_addr#:#Technischer Absender
 mail#:#mail_system_sys_signature#:#Signatur
 mail#:#mail_use_global_reply_to_addr#:#Globale Reply-To-Adresse nutzen
-mail#:#mail_use_global_reply_to_addr_info#:#Falls aktiviert, wird die unten eingetragene globale E-Mail-Adresse für den 'Reply-To'-Header der E-Mail genutzt. Somit wird die E-Mail-Adresse eines Senders nicht offengelegt. Eine direkte Antwort auf eine E-Mail ist dann nicht mehr möglich. 
+mail#:#mail_use_global_reply_to_addr_info#:#Falls aktiviert, wird die unten eingetragene globale E-Mail-Adresse für den 'Reply-To'-Header der E-Mail genutzt. Somit wird die E-Mail-Adresse eines Senders nicht offengelegt. Eine direkte Antwort auf eine E-Mail ist dann nicht mehr möglich.
 mail#:#mail_global_reply_to_addr#:#Reply-To
 mail#:#mail_global_reply_to_addr_info#:#Bitte tragen Sie hier die gewünschte 'Reply-To'-E-Mail-Adresse ein.
 mail#:#mail_s#:#Mails
@@ -9182,7 +9205,7 @@ survey#:#median#:#Median
 survey#:#median_between#:#zwischen
 survey#:#menuback#:#Zurück
 survey#:#menubacktosurvey#:#Zurück zur Umfrage
-survey#:#message_content_info#:#Geben Sie einen Benachrichtigungstext für das Versenden des Zuganscodes ein. Sie sollten die Platzhalter [code] (Zugangsschlüssel), [url] (die URL zu dieser Umfrage) verwenden und Platzhalter, die Sie in den Importdaten der Mailempfänger verwendet haben: %s. Die Platzhalter werden mit den importierten Teilnehmerdaten ersetzt.
+survey#:#message_content_info#:#Geben Sie einen Benachrichtigungstext für das Versenden des Zugangscodes ein. Sie sollten die Platzhalter [code] (Zugangsschlüssel), [url] (die URL zu dieser Umfrage) verwenden und Platzhalter, die Sie in den Importdaten der Mailempfänger verwendet haben: %s. Die Platzhalter werden mit den importierten Teilnehmerdaten ersetzt.
 survey#:#metric_question_floating_point#:#Der angegebene Wert ist eine Fließkommazahl. Fließkommazahlen sind für diesen Fragetyp nicht erlaubt!
 survey#:#metric_question_not_a_value#:#Der angegebene Wert ist kein nummerischer Wert!
 survey#:#metric_question_out_of_bounds#:#Der von Ihnen eingegebene Wert liegt nicht zwischen dem Minimalwert und dem Maximalwert!
@@ -9708,10 +9731,17 @@ webr#:#webr_import#:#Weblink importieren
 webr#:#webr_inactive_success#:#Der Weblink wurde deaktiviert.
 webr#:#webr_link_added#:#Ein neuer Weblink wurde angelegt.
 webr#:#webr_link_target#:#Ziel
-webr#:#webr_link_title#:#Titel des Weblinks
+webr#:#webr_link_title#:#Titel des Weblinks / Titel der Weblink-Sammlung
+webr#:#webr_link_type_single#:#Einzelner Weblink
+webr#:#webr_link_type_list#:#Weblink-Sammlung
+webr#:#webr_list_added#:#Eine neue Weblink-Sammlung wurde angelegt.
 webr#:#webr_list_desc#:#Beschreibung der Weblink-Sammlung
+webr#:#webr_list_set#:#Der Weblink wurde in eine Weblink-Sammlung umgewandelt.
 webr#:#webr_list_title#:#Titel der Weblink-Sammlung
 webr#:#webr_new_link#:#Neuen Weblink anlegen
+webr#:#webr_new_list#:#Neue Weblink-Sammlung anlegen
+webr#:#webr_new_list_info#:#Bitte geben Sie einen Titel und optional eine Beschreibung für die Präsentation dieser Weblink-Sammlung im Magazin ein.
+webr#:#webr_set_to_list#:#In Weblink-Sammlung umwandeln
 webr#:#webr_sort_manual#:#Manuelle Sortierung
 webr#:#webr_sort_title#:#Alphabetisch nach Titel
 webr#:#webr_sorting#:#Sortierung der Weblinks
@@ -9991,7 +10021,10 @@ dcl#:#dcl_activate_notification#:#Benachrichtigung
 dcl#:#dcl_table_id#:#Tabellen ID
 dcl#:#dcl_add_new_record#:#Eintrag hinzufügen
 dcl#:#dcl_list_fields#:#Felder
-dcl#:#dcl_list_visibility_and_filter#:#Sichtbarkeit und Filter
+dcl#:#dcl_list_visibility_and_filter#:#Liste
+dcl#:#dcl_view_settings#:#Ansichtseinstellungen
+dcl#:#dcl_view_configuration#:#Ansichtskonfiguration
+dcl#:#dcl_configuration_complete#:#Konfiguration abgeschlossen
 dcl#:#dcl_record#:#Eintrag
 dcl#:#dcl_add_new_field#:#Feld hinzufügen
 dcl#:#dcl_add_new_table#:#Neue Tabelle hinzufügen
@@ -10296,6 +10329,10 @@ ecs#:#ecs_tst_export_enabled#:#Freigeben
 rtst#:#rtst_call#:#ECS-Test aufrufen
 rbac#:#contribute#:#Beiträge erstellen
 dateplaner#:#cal_setting_global_vis_repos#:#Anzeige im Magazin
+dateplaner#:#cal_setting_global_crs_act#:#Aktivierung in Kursen
+dateplaner#:#cal_setting_global_grp_act#:#Aktivierung in Gruppen
+dateplaner#:#cal_setting_global_crs_act_info#:#Wenn ausgewählt, ist der Kurskalender standardmäßig in Kursen aktiviert. Unabhängig davon kann der Kalender in den Kurseinstellungen de/aktiviert werden.
+dateplaner#:#cal_setting_global_grp_act_info#:#Wenn ausgewählt, ist der Gruppenkalender standardmäßig in Gruppen aktiviert. Unabhängig davon kann der Kalender in den Gruppeneinstellungen de/aktiviert werden.
 dateplaner#:#cal_setting_global_crs_vis#:#Anzeige in Kursen
 dateplaner#:#cal_setting_global_grp_vis#:#Anzeige in Gruppen
 dateplaner#:#cal_setting_global_crs_vis_info#:#Wenn aktiviert, wird der Kurskalender standardmäßig in Kursen angezeigt. Unabhängig davon kann der Kalender in den Kurseinstellungen de/aktiviert werden.
@@ -10362,7 +10399,20 @@ dcl#:#dcl_tableviews#:#Ansichten
 dcl#:#dcl_tableviews_table#:#Ansichten der ausgewählten Tabelle
 dcl#:#dcl_tableview#:#Ansicht
 dcl#:#dcl_detailed_view#:#Einzelansicht
+dcl#:#dcl_edit_entry_rules#:#Bearbeitung
+dcl#:#dcl_create_entry_rules#:#Erstellung
+dcl#:#dcl_tableview_copy#:#Ansicht erfolgreich kopiert
+dcl#:#dcl_tableview_default_value_fail#:#Einige numerische Standardwerte konnten nicht kopiert werden, da sich Zeichen darin befanden. Bitte versuchen Sie es erneut.
 dcl#:#dcl_tableview_add#:#Neue Ansicht hinzufügen
+dcl#:#dcl_tableview_fieldtitle#:#Feld-Titel
+dcl#:#dcl_tableview_locked#:#Gesperrt
+dcl#:#dcl_tableview_required#:#Verpflichtend
+dcl#:#dcl_tableview_default_value#:#Standardwert
+dcl#:#dcl_tableview_visible#:#Sichtbar
+dcl#:#dcl_tableview_not_visible#:#Nicht sichtbar
+dcl#:#dcl_tableview_required_visible#:#Verpflichtend & Sichtbar
+dcl#:#dcl_tableview_locked_visible#:#Gesperrt & Sichtbar
+dcl#:#dcl_tableview_field_access#:#Zugriffsrecht
 dcl#:#dcl_delete_views#:#Ansichten löschen
 dcl#:#dcl_delete_tables#:#Tabellen löschen
 dcl#:#dcl_msg_tableview_updated#:#Ansicht aktualisiert
@@ -10818,6 +10868,8 @@ tos#:#tos_crit_type_usr_country_info#:#Das Dokument muss akzeptiert werden, wenn
 tos#:#tos_account_reg_not_possible#:#Eine Selbstregistrierung ist aktuell nicht möglich, da in dieser Installation keine Benutzervereinbarung angeboten wird. Bitte kontaktieren Sie Ihren <a href="%1$s">Systemadministrator</a> für weitere Informationen.
 tos#:#tos_reevaluate_on_login#:#Prüfe neue Nutzungsvereinbarung beim Login
 tos#:#tos_reevaluate_on_login_desc#:#Falls aktiviert, wird nach erfolgreicher Anmeldung über die Weboberfläche geprüft, ob ein ggf. bereits akzeptiertes Dokument keine Gültigkeit mehr hat, da sich die Vorlagekriterien des Benutzers geändert haben. Ist dies der Fall, und kann ILIAS ein neues Dokument finden, so muss der Benutzer dieses neu aktepzieren.
+tos#:#tos_withdrawal_usr_deletion#:#Löschung des Benutzerkontos beim Widerruf
+tos#:#tos_withdrawal_usr_deletion_info#:#Falls aktiviert, resultiert der bestätigte Widerruf der Nutzungsvereinbarung in der Löschung des Benutzerkontos. 
 ecs#:#ecs_sync_trees#:#CMS-Verzeichnisbäume aktualisieren
 rbac#:#chtr_delete#:#Chat löschen oder verschieben
 ecs#:#ecs_role_mappings#:#Rollenzuordnung für Kurse/Gruppen
@@ -11060,13 +11112,14 @@ survey#:#survey_360_list_title#:#360°-Modus
 survey#:#survey_360_select_appraisee#:#Auswählen
 survey#:#survey_360_appraisee#:#Feedback-Nehmer
 skmg#:#skmg_skill_profiles#:#Profile
+skmg#:#skmg_add_local_profile#:#Lokales Profil hinzufügen
 skmg#:#skmg_add_profile#:#Profil hinzufügen
 skmg#:#skmg_edit_profile#:#Profil bearbeiten
 skmg#:#skmg_delete_profiles#:#Wollen Sie wirklich die folgenden Profile löschen?
 skmg#:#skmg_assigned_skill_levels#:#Zugeordnete Kompetenzausprägungen
 skmg#:#skmg_assign_level#:#Ausprägung zuordnen
 skmg#:#skmg_profile#:#Profil
-skmg#:#skmg_remove_levels#:#Ausprägung löschen
+skmg#:#skmg_remove_levels#:#Ausprägungen entfernen
 skmg#:#skmg_select_skill_level_assign#:#Bitte wählen Sie eine Kompetenz aus.
 skmg#:#skmg_confirm_remove_level_ass#:#Wollen Sie wirklich die folgenden Kompetenzausprägungen aus dem Profil entfernen?
 skmg#:#skmg_assigned_users#:#Zugeordnete Rollen und Benutzer
@@ -11197,7 +11250,6 @@ registration#:#registration_codes_override_global_info#:#Diese Einstellungen wer
 crs#:#event_list_registered_only#:#Nur Angemeldete
 didactic#:#didactic_default_type#:#Standard
 mmbr#:#mmbr_info_delete_sure_unsubscribe#:#Wollen Sie wirklich die Mitgliedschaft für die folgenden Kurse und Gruppen beenden?
-file#:#repository_disk_quota#:#Disk-Quota für Magazin
 pd#:#pd_remove_multiple#:#Mehrere Objekte entfernen
 survey#:#survey_360_mode_info#:#Für Peer-Reviews von Personen
 blog#:#blog_draft_info_contributors#:#Dieser Beitrag ist als Entwurf nur für die Mitwirkenden sichtbar.
@@ -12000,7 +12052,6 @@ blog#:#blog_posting_not_found#:#Der Beitrag ist nicht verfügbar.
 ldap#:#ldap_choose_role#:#Rolle auswählen
 rep#:#rep_time_period#:#Zeitraum
 cntr#:#exc_next_deadline_single#:#Abgabefrist
-file#:#repository_disk_quota_info#:#Wenn aktiviert, werden für alle Benutzer die Disk-Quota im Magazin geprüft und optional E-Mails an Administratoren und Benutzer versendet.
 trac#:#trac_object_statistics_info#:#Wenn aktiviert, werden Daten für die Zugriffsstatistiken gesammelt.
 ldap#:#ldap_user_sync_cron_info#:#Wenn aktiviert, werden Benutzerkonten aus dem LDAP-Verzeichnis importiert und optional laufend synchronisiert.
 survey#:#survey_reminder_cron_info#:#Wenn aktiviert, werden Benutzer an die Teilnahme an Umfragen erinnert.
@@ -12030,6 +12081,7 @@ skmg#:#skmg_usage_type_info_res#:#Zuordnung zu Magazinobjekten
 skmg#:#skmg_usage_obj_objects#:#Objekt(e)
 skmg#:#skmg_usage_obj_users#:#Benutzer
 skmg#:#skmg_usage_obj_profiles#:#Profil(e)
+skmg#:#skmg_assigned_objects#:#Zugeordnete Objekte
 skmg#:#skmg_cannot_delete_nodes_in_use#:#Einige Objekte können nicht gelöscht werden, da sie noch in Gebrauch sind.
 skmg#:#skmg_status_draft#:#In Vorbereitung (Offline)
 skmg#:#skmg_status_draft_info#:#Eintrag wird Benutzern nicht angezeigt.
@@ -12445,6 +12497,10 @@ crs#:#crs_mem_tbl_header#:#Kursteilnehmer
 grp#:#grp_mem_tbl_header#:#Gruppenteilnehmer
 mmbr#:#mmbr_selected_users#:#Ausgewählte Teilnehmer
 mmbr#:#mmbr_btn_mail_selected_users#:#Mail verschicken
+sess#:#sess_reg_tutor#:#Keine Anmeldung möglich
+sess#:#sess_reg_tutor_info#:#Die Anmeldung durch Benutzer ist inaktiv. Lediglich Administratoren können Benutzer anmelden.
+sess#:#sess_reg_cannot_participate#:#Teilnahme absagen
+sess#:#sess_reg_cannot_participate_info#:#Benutzer haben auf der "Info-Seite" die Möglichkeit, ihre Teilnahme abzusagen.
 sess#:#sess_participation_refused_info#:#Ihre Teilnahme an dieser Sitzung wurde abgesagt.
 sess#:#sess_bt_refuse#:#Teilnahme absagen
 sess#:#sess_part_table_excused#:#Abgesagt
@@ -12454,9 +12510,9 @@ sess#:#sess_reg_type#:#Anmeldeverfahren
 sess#:#sess_reg_direct#:#Direkte Anmeldung
 sess#:#sess_reg_direct_info#:#Benutzer müssen auf „Anmelden“ klicken, wenn Sie an dieser Sitzung teilnehmen möchten.
 sess#:#sess_reg_request#:#Teilnahme beantragen
-sess#:#sess_reg_disabled#:#Keine Anmeldung erforderlich
+sess#:#sess_reg_disabled#:#Ohne Anmeldung
 sess#:#sess_reg_request_info#:#Eine Teilnahme an der Sitzung erfordert die Zustimmung durch einen Administrator.
-sess#:#sess_reg_disabled_info#:#Für diesen Sitzungstermin ist eine Anmeldung nicht erforderlich.
+sess#:#sess_reg_disabled_info#:#Optionen zur Anmeldung von Benutzern zur Sitzung werden nicht angeboten.
 sess#:#sess_reg_max_members_short#:#Begrenzte Teilnehmeranzahl
 sess#:#sess_reg_max_members#:#Maximale Anzahl
 sess#:#sess_reg_max_members_info#:#Ist die maximale Teilnehmeranzahl erreicht, ist eine Anmeldung nicht mehr möglich.
@@ -13367,6 +13423,8 @@ contact#:#contact_awrn_ap_contacts_info#:#Alle bestätigten Kontakte eines Benut
 adm#:#adm_support_contacts#:#Technische Betreuung
 adm#:#adm_awrn_support_contacts_info#:#Die Benutzer für die technische Betreuung werden aufgelistet. Die Benutzer werden im Bereich "Allgemeine Einstellungen" » "Kontaktinformationen" der technischen Betreuung zugeordnet.
 adm#:#adm_support_contacts_info#:#Technische Betreuer werden in der Fußzeile verlinkt und - wenn aktiviert - in der „Wer ist online?“-Anzeige aufgelistet. Komma-separierte Liste von Benutzeraccounts.
+adm#:#adm_acc_ctrl_cpt_enable#:#Info Barrierefreiheit aktivieren
+adm#:#adm_acc_ctrl_cpt_desc#:#Wenn aktiviert, erscheint der Link zur Info Barrierefreit im Footer.
 adm#:#adm_accessibility_contacts#:#Anlaufstelle für Barrierefreiheit
 adm#:#adm_accessibility_contacts_info#:#Kontaktpersonen zur Meldung von Problemen mit der Barrierefreiheit in der Fußzeile. Komma-separierte Liste von Benutzeraccounts.
 mmbr#:#mmbr_awrn_my_groups_courses#:#Meine Kurse und Gruppen
@@ -13723,7 +13781,7 @@ sess#:#sess_accept_request#:#Zu Sitzung zulassen
 sess#:#sess_new_registrations#:#Teilnahmeanträge
 mail#:#mail_attachment_file_not_exist#:#Mindestens einer der folgenden Anhänge konnte nicht gefunden werden: %1$s
 mail#:#mail_recipient_not_found#:#%1$s (es konnte kein gültiger Empfänger gefunden werden)
-mail#:#mail_multiple_role_recipients_found#:#%1$s (für den Emfpänger wurden mehrere Rollen gefunden: %2$s)
+mail#:#mail_multiple_role_recipients_found#:#%1$s (für den Empfänger wurden mehrere Rollen gefunden: %2$s)
 mail#:#mail_generic_rcp_error#:#Beim Validieren der Empfänger ist ein Fehler aufgetreten: %1$s
 rbac#:#mep_copy#:#Medienpool kopieren
 crs#:#crs_cannot_find_role#:#Rolle konnte nicht gefunden werden.
@@ -13819,6 +13877,8 @@ badge#:#badge_user_profile#:#Benutzerprofil
 badge#:#badge_badge#:#Badge
 obj#:#obj_tool_setting_badges#:#Badges
 obj#:#obj_tool_setting_badges_info#:#Wenn aktiviert können Badges konfiguriert werden.
+obj#:#obj_tool_ext_mail_subject_prefix#:#E-Mail-Betreff Prefix
+obj#:#obj_tool_ext_mail_subject_prefix_info#:#Tragen Sie hier einen kurzen Text ein, der in die Betreffzeile von externen E-Mails in den Betreff aufgenommen wird. Dies erleichtert das Identifizieren von E-Mails aus unterschiedlichen Bereichen.
 badge#:#badge_add_template#:#Template hinzufügen
 badge#:#badge_image_template_form#:#Bildvorlage
 badge#:#badge_image_from_upload#:#Bild hochlanden
@@ -14063,6 +14123,9 @@ exc#:#exc_settings_feedback_file#:#Datei
 mem#:#mem_print_view_form#:#Standardeinstellungen für Druckansicht
 mem#:#mem_settings_tab_print_view#:#Einstellungen Druckansicht
 mem#:#mem_settings_tab_settings#:#Allgemeine Einstellungen
+didactic#:#didactic_icon#:#Icon
+didactic#:#didactic_icon_info#:#Das Icon wird für alle Objekte angezeigt, die diese Vorlagen anwenden. "Angepasste Icons" der Objekte überschreiben das Icon der Vorlage. Icons können nur für Container-Objekte (wie zum Beispiel Kurs und Kategorien) konfiguriert werden.
+didactic#:#didactic_icon_error#:#Icons können nur für Container-Objekte genutzt werden.
 didactic#:#activate_local_didactic_template#:#Gültigkeitsbereich
 didactic#:#effective_form#:#Vorlage wirksam ab
 didactic#:#more_translations#:#Weitere Übersetzungen
@@ -14327,7 +14390,6 @@ pdfgen#:#greyscale_info#:#PDF wird in Graustufen erzeugt
 pdfgen#:#print_media_info#:#Es wird der "print" media-type genutzt anstatt "screen"
 pdfgen#:#margin_info#:#Rand in mm z.B. 10mm
 pdfgen#:#page_settings#:#Seiteneinstellungen
-pdfgen#:#phantomjs#:#PhantomJS
 pdfgen#:#orientation#:#Orientierung
 pdfgen#:#print_media_type#:#Benutze 'Druck Media Type' anstatt 'Bildschirm'
 pdfgen#:#margin#:#Rand
@@ -14360,7 +14422,7 @@ pdfgen#:#page_size#:#Seitengröße
 pdfgen#:#reset_to_default#:#Default Einstellungen laden
 pdfgen#:#problem_with_purposes#:#Es wurde ein Problem in der Konfiguration festgestellt. Nutzen Sie bitte den Button "Bereinigen", um das Problem zu lösen.
 copg#:#copg_questions_not_supported_here#:#In diesem Kontext werden keine Fragen unterstützt.
-auth#:#auth_err_login_attempts_deactivation#:#Das Benutzerkonto wurde wegen falscher Login-Versuche deaktiviert.
+auth#:#auth_err_login_attempts_deactivation#:#Das Benutzerkonto wurde wegen zu vieler falscher Login-Versuche deaktiviert.
 crs#:#crs_edit_lo_introduction#:#Einleitung bearbeiten
 rbac#:#grp_manage_members#:#Mitglieder einer Gruppe verwalten
 rbac#:#crs_manage_members#:#Mitglieder eines Kurses verwalten
@@ -14396,7 +14458,7 @@ style#:#manage_system_styles#:#System-Styles verwalten
 style#:#scope#:#Gültigkeitsbereich
 auth#:#auth_saml#:#SAML
 common#:#auth_saml#:#SAML
-common#:#saml_log_in#:#Login
+common#:#saml_log_in#:#Anmelden
 common#:#saml_login_form_txt#:#Bei ILIAS anmelden über SAML
 common#:#saml_login_form_info_txt#:#Um sich über SAML anzumelden, klicken Sie bitte den 'Anmelde'-Button.
 common#:#login_to_ilias_via_saml#:#Bei ILIAS via SAML-Authentifizierung anmelden
@@ -14478,6 +14540,9 @@ skmg#:#skmg_assigned_profiles#:#Zugewiesene Profile
 skmg#:#skmg_selected_skills#:#Kompetenzeinträge
 skmg#:#skmg_hide_profile_self_eval#:#Profilwerte nach Selbsteinschätzung anzeigen
 skmg#:#skmg_hide_profile_self_eval_info#:#Für einzelne Kompetenzwerte werden Profilwerte erst angezeigt, nachdem der Benutzer eine Selbsteinschätzung abgegeben hat.
+skmg#:#skmg_local_assignment_profiles#:#Lokale Zuordnung von globalen Profilen erlauben
+skmg#:#skmg_allow_local_profiles#:#Erstellung von lokalen Profilen erlauben
+skmg#:#skmg_allow_local_profiles_info#:#Nutzer mit dem Recht 'Einstellungen bearbeiten' in Kursen und Gruppen können lokale Kompetenzprofile erstellen und dabei global definierte Kompetenzen verwenden.
 skmg#:#skmg_suggested#:#Vorgeschlagenes Magazinobjekt
 skmg#:#skmg_lp_triggers_level#:#Gesetzt durch 'Bearbeitet'-Status
 skmg#:#skmg_save_settings#:#Einstellungen speichern
@@ -14604,6 +14669,18 @@ cont#:#cont_path#:#Pfad
 cont#:#cont_really_remove_skill_from_course#:#Sollen die Kompetenzen wirklich aus der Liste entfernt werden?
 cont#:#cont_skill_do_not_set#:#Nicht setzen
 cont#:#cont_skill_no_skill#:#Kein Wert (zurücksetzen)
+cont#:#cont_skill_profiles#:#Profile der Mitglieder
+cont#:#cont_skill_profile#:#Profil
+cont#:#cont_add_global_profile#:#Globales Profil hinzufügen
+cont#:#cont_add_local_profile#:#Lokales Profil hinzufügen
+cont#:#cont_skill_assigned_profiles#:#Profilauswahl
+cont#:#cont_skill_no_profile_selected#:#Bitte wählen Sie ein Profil aus.
+cont#:#cont_skill_really_remove_profiles_from_list#:#Sollen die Profile wirklich aus der Liste entfernt werden?
+cont#:#cont_skill_really_remove_profile_from_list#:#Soll das Profil wirklich aus der Liste entfernt werden?
+cont#:#cont_skill_really_delete_profiles_from_list#:#Sollen die Profile wirklich gelöscht werden?
+cont#:#cont_skill_really_delete_profile_from_list#:#Soll das Profil wirklich gelöscht werden?
+cont#:#cont_skill_removal_not_possible#:#Das Entfernen von lokalen Kompetenzprofilen ist nicht möglich. Bitte wählen Sie ausschließlich globale Kompetenzprofile aus.
+cont#:#cont_skill_deletion_not_possible#:#Das Löschen von globalen Kompetenzprofilen ist nicht möglich. Bitte wählen Sie ausschließlich lokale Kompetenzprofile aus.
 cont#:#cont_mem_skills#:#Kompetenzen
 cont#:#cont_published#:#Veröffentlichung
 cont#:#cont_assign_competence#:#Mitgliedern Kompetenzen zuweisen
@@ -14774,6 +14851,7 @@ file#:#file_suffix_custom_white_info#:#Diese Dateiendungen werden der obigen Pos
 file#:#file_suffix_overall_white#:#Effektive Positivliste
 file#:#file_suffix_overall_white_info#:#Dies ist die endgültige Liste akzeptierter Dateiendungen.
 file#:#file_upload_info_file_with_critical_unknown_extension_later_renamed_when_downloading#:#Die hochgeladene Datei enthält eine kritische oder unbekannte Dateiendung. Die Dateiendung wird bei jedem Download zu .sec geändert.
+file#:#not_yet_migrated#:#Dieses Datei-Objekt wurde noch nicht migriert und es können keine neue Versionen angelegt werden. Wenden Sie sich an die Administratoren der Plattform.
 common#:#settings_presentation_header#:#Darstellung
 common#:#obj_copa#:#Inhaltsseite
 common#:#objs_copa#:#Inhaltsseiten
@@ -14794,6 +14872,14 @@ copa#:#copa_edit#:#Inhaltsseite bearbeiten
 copa#:#obj_copa_duplicate#:#Inhaltsseite duplizieren
 copa#:#copa_btn_lp_toggle_state_completed#:#Auf "Nicht bearbeitet" setzen
 copa#:#copa_btn_lp_toggle_state_not_completed#:#Auf "Bearbeitet" setzen
+copa#:#copa_prop_reading_time#:#Lesezeit
+copa#:#copa_value_reading_time_f_s#:#%s Minute
+copa#:#copa_value_reading_time_f_p#:#%s Minuten
+common#:#obj_cpad#:#Inhaltsseiten
+common#:#obj_cpad_desc#:#Administration der Inhaltsseiten
+common#:#obj_cpad#_desc#:#Administration Inhaltsseiten
+cpad#:#cpad_reading_time_status#:#Lesezeit
+cpad#:#cpad_reading_time_status_desc#:#Falls aktiviert, wird die geschätzte Lesezeit für Inhaltsseiten-Objekten ermittelt und agenzeigt.
 adve#:#adve_grp_copa#:#Inhaltsseiten
 common#:#msg_info_blacklisted#:#Bitte entschuldigen Sie!  Sie dürfen die Datei aus Sicherheitsgründen nicht hochladen.
 wiki#:#wiki_change_notification_body_new#:#die folgende Wiki-Seite wurde neu angelegt
@@ -14872,6 +14958,9 @@ mme#:#sub_provider#:#Provider
 mme#:#sub_actions#:#Aktionen
 mme#:#sub_icon#:#Icon
 mme#:#sub_icon_byline#:#Hochgeladene SVG-Icons werden invertiert angezeigt.
+mme#:#sub_role_based_visibility#:#Sichtbarkeit für Rollen
+mme#:#sub_role_based_visibility_byline#:#Globale Rollen wählen, welche dieses Item sehen können. Wenn nicht aktiviert, wird das Item immer angezeigt.
+mme#:#sub_global_roles#:#Globale Rollen
 mme#:#button_save#:#Speichern
 mme#:#table_show_inactive#:#Inaktive anzeigen
 mme#:#sub_title_default#:#Titel (Standard-Sprache)
@@ -15218,7 +15307,7 @@ lso#:#participate#:#Anmelden
 lhist#:#lhist_show_more#:#Mehr anzeigen
 meta#:#meta_info_only_repository_objects#:#Nachfolgend werden nur Magazinobjekte angezeigt, nicht aber Medienobjekte oder Lernmodulseiten.
 book#:#book_objects_available#:#Verfügbare Objekte: %s
-book#:#book_limit_objects_available#:#Sie können nicht %s Teilnerhmer zu "%s" hinzufügen, weil nur %s Einträge verfügbar sind.
+book#:#book_limit_objects_available#:#Sie können nicht %s Teilnehmer zu "%s" hinzufügen, weil nur %s Einträge verfügbar sind.
 book#:#booking_multiple_succesfully#:#Buchungen erfolgreich durchgeführt
 common#:#lti_outcome#:#Benachrichtigung über LTI-Lernfortschritt
 ui#:#ui_chars_remaining#:#Verbleibende Buchstaben
@@ -15339,7 +15428,7 @@ certificate#:#persistent_certificate_mode#:#Benutzer Zertifikatserstellung
 certificate#:#persistent_certificate_mode_cron#:#Cron-Job
 certificate#:#persistent_certificate_mode_cron_info#:#Diese Option wird für Systeme mit hohen Benutzerinteraktion empfohlen
 certificate#:#persistent_certificate_mode_instant#:#Direkt
-certificate#:#persistent_certificate_mode_instant_info#:#Diese Option wird für Systeme mit geringer bis zu mittelgroßer Benutzerinteratkion empfohlen. Für System die zu hoher Last während der Zertifikatserstellung neigen, wird die Option "Cron-Job" empfohlen.
+certificate#:#persistent_certificate_mode_instant_info#:#Diese Option wird für Systeme mit geringer bis zu mittelgroßer Benutzerinteraktion empfohlen. Für Systeme, die zu hoher Last während der Zertifikatserstellung neigen, wird die Option "Cron-Job" empfohlen.
 common#:#obj_task#:#To-Do
 task#:#task_derived_tasks#:#To-Do
 task#:#task_tasks_with_deadline#:#Mit Endtermin
@@ -15364,7 +15453,7 @@ content#:#cont_Interaction#:#Interaktion
 content#:#cont_Background#:#Hintergrund
 dateplaner#:#cal_usr_info#:#Informationen zum Termin
 certificate#:#certificate_learning_progress_must_be_active#:#Nur Objekte mit eineme aktiven Lernfortschritt dürfen ausgewählt werden. Bei folgenden Objekten ist der Lernfortschritt nicht aktiv %s
-certificate#:#learning_progress_deactivated#:#Der Lernfortschritt für dieses Objekt ist deaktiviert. Zum Bearbeiten der Zertifikatsvorlage und zum Erlhalten von Nutzerzertifikaten muss der Lernfortschritt aktiviert sein.
+certificate#:#learning_progress_deactivated#:#Der Lernfortschritt für dieses Objekt ist deaktiviert. Zum Bearbeiten der Zertifikatsvorlage und zum Erhalten von Nutzerzertifikaten muss der Lernfortschritt aktiviert sein.
 exc#:#exc_tbl_action_open_submission#:#Abgaben öffnen
 exc#:#exc_copy_zip_error#:#Die Abgabe kann nicht geöffnet werden. Es ist ein Fehler beim Kopieren der Dateien aufgetreten.
 exc#:#exc_find_zip_error#:#Die Abgabe kann nicht geöffnet werden. Die Originaldateien wurden nicht gefunden.
@@ -15483,8 +15572,6 @@ svy#:#svy_status_finished#:#Beendet
 svy#:#svy_users_invited#:#Die Benutzer wurden eingeladen.
 svy#:#svy_finish_survey#:#Umfrage "%1" bearbeiten
 pwsp#:#pwsp_enable_personal_resources#:#Persönliche Ressourcen aktivieren
-file#:#personal_resources_disk_quota#:#Disk-Quota für den Persönliche Ressourcen aktivieren
-file#:#personal_resources_disk_quota_info#:#Erlaubt die Begrenzung des verfügbaren Plattenplatzes für jedes Benutzerkonto und jede globale Rolle. Dies betrifft nur Dateien in den persönliche Ressourcen und in Portfolios. Sobald ein Benutzer die definierte Disk-Quota erreicht, kann dieser keine weiteren Dateien mehr hochladen.
 common#:#personal_resources#:#Persönliche Ressourcen
 file#:#personal_resources_quota_exceeded_warning#:#Sie haben den maximal verfügbaren Plattenplatz für Dateien in den Persönliche Ressourcen überschritten. Löschen Sie vorhandene Dateien, um freien Platz für neue Dateien zu schaffen.
 file#:#personal_resources_quota_status_legend#:#Sie belegen %1$s Ihrer Disk-Quota von %2$s (%3$d%%).
@@ -15650,9 +15737,9 @@ lti#:#conf_user_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeu
 lti#:#conf_user_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
 lti#:#conf_user_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
 lti#:#conf_user_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
-lti#:#conf_user_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
+lti#:#conf_user_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
 lti#:#conf_user_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
-lti#:#conf_user_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den Benutzer zulassen.
+lti#:#conf_user_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den Benutzer zulassen.
 lti#:#conf_user_ident_real_email#:#E-Mail Adresse
 lti#:#conf_user_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
 lti#:#conf_user_name#:#Benutzername
@@ -15829,12 +15916,14 @@ cmix#:#conf_external_lrs#:#Externer LRS
 cmix#:#info_external_lrs#:#Bei einem externen Learning Record Store (LRS) wird dem Anwender ein Hinweis angezeigt. Ein externer LRS ist gekennzeichnet durch einen unzureichenden Einfluss auf den LRS und durch den Betreiber von ILIAS. Dies ist der Fall, wenn es keine Rechte zum Löschen gibt.
 cmix#:#conf_user_ident#:#Benutzeridentifikation
 cmix#:#conf_user_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeutige ILIAS-Plattform-ID lautet:
-cmix#:#conf_user_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+cmix#:#conf_user_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
 cmix#:#conf_user_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
-cmix#:#conf_user_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+cmix#:#conf_user_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
 cmix#:#conf_user_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
-cmix#:#conf_user_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+cmix#:#conf_user_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
 cmix#:#conf_user_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den Benutzer zulassen.
+cmix#:#conf_user_ident_il_uuid_random#:#Zufalls-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
+cmix#:#conf_user_ident_il_uuid_random_info#:#Pro ILIAS-Objekt und ILIAS-Benutzer wird eine Zufalls-ID erzeugt, die bei jedem Aufruf identisch bleibt. Rückschlüsse auf einen Benutzer sind sehr eingeschränkt, da Objekt-übergreifende Nutzerprofile praktisch nicht erstellt werden können.
 cmix#:#conf_user_ident_real_email#:#E-Mail Adresse
 cmix#:#conf_user_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
 cmix#:#conf_user_name#:#Benutzername
@@ -16193,3 +16282,147 @@ survey#:#svy_max_sum_score#:#Maximale Skalenpunktesumme
 content#:#cont_select_none#:#Auswahl aufheben
 feed#:#feed_no_local_url#:#Bitte geben sie eine gültige externe Feed URL an.
 common#:#mainbar_more_label#:#Mehr
+common#:#obj_wbdv#:#WebDAV
+common#:#obj_wbdv_desc#:#Konfiguration der WebDAV Einstellungen.
+common#:#obj_fils#:#Datei-Services
+common#:#obj_fils_desc#:#Konfiguration der Datei-Service Einstellungen.
+fils#:#file_services#:#Datei-Services
+fils#:#file_services_description#:#Konfiguration der Datei-Service Einstellungen.
+fils#:#file_suffix_default_positive#:#Dateiendungen: Positivliste (Ausgangsliste)
+fils#:#file_suffix_default_positive_info#:#Voreingestellte Ausgangsliste für akzeptierte Dateiendungen.
+fils#:#file_suffix_custom_negative#:#Dateiendungen: Negativliste (Anpassungen)
+fils#:#file_suffix_custom_negative_info#:#Diese Dateiendungen werden aus der obigen Positivliste entfernt.
+fils#:#file_suffix_custom_positive#:#Dateiendungen: Positivliste (Anpassungen)
+fils#:#file_suffix_custom_positive_info#:#Diese Dateiendungen werden der obigen Positivliste hinzugefügt.
+fils#:#file_suffix_overall_positive#:#Effektive Positivliste
+fils#:#file_suffix_overall_positive_info#:#Dies ist die endgültige Liste akzeptierter Dateiendungen.
+fils#:#file_suffix_custom_expl_negative#:#Verbotene Dateiendungen
+fils#:#file_suffix_custom_expl_negative_info#:#Dateien mit diesen Endungen werden beim Upload nicht akzeptiert.
+common#:#file_objects#:#Datei-Objekte
+common#:#preview_renderers#:#Vorschau-Renderer
+lm#:#lm_btn_lp_toggle_state_completed#:#Auf "Nicht bearbeitet" setzen
+lm#:#lm_btn_lp_toggle_state_not_completed#:#Auf "Bearbeitet" setzen
+common#:#back_to_course#:#Zurück zum Kurs
+skmg#:#skmg_context_global#:#Global
+skmg#:#skmg_context_local#:#Lokal
+common#:#obj_peac#:#Akkordeon
+common#:#obj_peadl#:#Erweiterte Liste
+common#:#obj_peadt#:#Erweiterte Tabelle
+common#:#obj_pecd#:#Code
+common#:#obj_pech#:#Sprechstunde
+common#:#obj_pecl#:#Spaltenlayout
+common#:#obj_peclp#:#Zwischenablage
+common#:#obj_pecom#:#Kompetenz
+common#:#obj_pecrs#:#Kurs
+common#:#obj_pecrt#:#Zertifikat
+common#:#obj_pecs#:#Inhaltsbaustein
+common#:#obj_pedt#:#Datentabelle
+common#:#obj_pefl#:#Dateiliste
+common#:#obj_peim#:#Interaktives Bild
+common#:#obj_pelh#:#Lernverlauf
+common#:#obj_pemed#:#Bild/Audio/Video
+common#:#obj_pemp#:#Karte
+common#:#obj_pepd#:#Persönliche Daten
+common#:#obj_pepe#:#Plugin Element
+common#:#obj_pepl#:#Seitenliste
+common#:#obj_peplh#:#Platzhalter
+common#:#obj_pequ#:#Frage
+common#:#obj_perl#:#Materalienliste
+common#:#obj_pesc#:#Block
+common#:#obj_petmp#:#Seitenvorlage
+common#:#obj_peusr#:#Benutzer
+survey#:#svy_compress_view#:#Komprimierte Sicht
+survey#:#svy_compress_view_info#:#Alle Single-Choice Fragen eines Fragenblocks mit gleicher Antwortskalierung werden matrixartig dargestellt.
+cmix#:#only_moveon_label#:#Nur Daten zum Lernerfolg speichern
+cmix#:#only_moveon_info#:#Mit dieser nur für den ILIAS-LRS-Proxy zur Verfügung stehenden Option werden nur Statements mit definierten Verben im Learning Record Store gespeichert (WhiteList). Dem Content wird mitgeteilt, dass die Statements gespeichert worden wären. Das sichert in der Regel die Ablauffähigkeit, sollte jedoch mit dem Content-Anbieter abgesprochen sein.
+cmix#:#achieved_label#:#Statements mit dem Verb 'achieved'
+cmix#:#achieved_info#:#Erfolgreich ein gewünschtes Ziel, Niveau oder Ergebnis durch Anstrengung, Geschicklichkeit oder Mut herbeiführen oder erreichen.
+cmix#:#answered_label#:#Statements mit dem Verb 'answered'
+cmix#:#answered_info#:#Auf eine Frage wurde geantwortet - wobei das Objekt im Allgemeinen eine Aktivität ist, die die Frage repräsentiert. Der Text der Antwort ist oft in der Antwort innerhalb des Ergebnisses enthalten.
+cmix#:#completed_label#:#Statements mit dem Verb 'completed'
+cmix#:#completed_info#:#Die Aktivität wurde normal beendet oder abgeschlossen.
+cmix#:#failed_label#:#Statements mit dem Verb 'failed'
+cmix#:#failed_info#:#Die Aktivität wurde nicht erfolgreich bestanden bis zu einem vorher festgelegten Grad an Zufriedenheit.
+cmix#:#initialized_label#:#Statements mit dem Verb 'initialized'
+cmix#:#initialized_info#:#Die Aktivität wurde erfolgreich begonnen.
+cmix#:#passed_label#:#Statements mit dem Verb 'passed'
+cmix#:#passed_info#:#Die Aktivität wurde bis zu einem vorher festgelegten Grad der Zufriedenheit erfolgreich bestanden.
+cmix#:#progressed_label#:#Statements mit dem Verb 'progressed'
+cmix#:#progressed_info#:#Bezeichnet einen Wert, der angibt, wie weit ein Akteur in einer Aktivität fortgeschritten ist oder sich durch eine Aktivität bewegt hat.
+cmix#:#satisfied_label#:#Statements mit dem Verb 'satisfied'
+cmix#:#satisfied_info#:#Zeigt an, dass die Kriterien des Objekts oder der Aktivität erfüllt wurden.
+cmix#:#terminated_label#:#Statements mit dem Verb 'terminated'
+cmix#:#terminated_info#:#Die Aktivität wurde erfolgreich beendet.
+cmix#:#hide_data_label#:#Daten schwärzen
+cmix#:#hide_data_info#:#Mit dieser nur für den ILIAS-LRS-Proxy zur Verfügung stehenden Option werden bestimmte Daten in Statements mit unkenntlich gemachten Werten im Learning Record Store gespeichert.
+cmix#:#timestamp_label#:#Zeitstempel 'timestamp'
+cmix#:#timestamp_info#:#Der timestamp kennzeichnet den Zeitpunkt einer durch das Statement gekennzeichneten Aktion. Der timestamp wird durch diese Option auf den Standardwert 01.01.1970 (1970-01-01T00:00:00.000Z) gesetzt. Bitte beachten Sie, dass ein Learning Record Store gegebenenfalls selbständig einen Wert für das Speicherdatum (stored) setzt, der mit dem timestamp nahezu identisch sein kann.
+cmix#:#duration_label#:#Zeitdauer 'duration'
+cmix#:#duration_info#:#Die Zeitdauer kann z.B. für die Beantwortung einer Aufgabe erfasst werden. Die Zeitdauer 'duration' wird durch diese Option auf den Standardwert 0 Sekunden (PT00.000S) gesetzt.
+cmix#:#no_substatements_label#:#Substatements nicht speichern
+cmix#:#no_substatements_info#:#Mit dieser Option, die nur für den ILIAS LRS-Proxy zur Verfügung steht, kann die Speicherung von untergeordneten Statements unterdrückt werden. Dies kann z.B. die Beantwortung einzelner Aufgaben in einem Test beeinflussen. Dem Content wird mitgeteilt, dass die Statements gespeichert worden wären.
+content#:#cont_delete_content#:#Inhalte löschen
+adve#:#adve_autosave#:#Intervall automatisches Speichern
+adve#:#adve_autosave_info#:#Textinhalte werden in diesem Intervall automatisch gespeichert. Kürzere Intervalle führen zu höherer Serverlast und geringerer Systemperformanz.
+content#:#cont_edit_comp#:#Bearbeitungsmodus
+content#:#cont_edit_multi#:#Mehrfachauswahl
+content#:#cont_block_format#:#Blockformat
+content#:#cont_upload_file#:#Datei hochladen
+content#:#cont_add_url#:#URL angeben
+content#:#cont_url_info#:#URL einer Mediendatei oder Youtube-URL.
+content#:#cont_choose_from_pool#:#Aus Medienpool
+content#:#cont_choose_media_pool#:#Medienpool auswählen
+content#:#cont_no_block#:#Kein Block
+content#:#cont_show_fullscreen#:#Vollbild anzeigen
+content#:#cont_advanced_settings#:#Erweiterte Einstellungen
+content#:#cont_table_edit_cells#:#Zellen editieren
+content#:#cont_last_update#:#Zuletzt gespeichert
+common#:#enable_comments_export#:#Export von Kommentaren
+note#:#note_enable_comments_export_info#:#Erlaubt innerhalb von Objekten wie Portfolios, Blogs oder Wikis die Kommentare zu exportieren.
+note#:#note_html_export_include_comments#:#Sollen die Kommentare mit exportiert werden?
+wiki#:#wiki_incl_comments#:#inklusive Kommentare
+blog#:#blog_incl_comments#:#inklusive Kommentare
+mob#:#mob_upload_file#:#Datei hochladen
+mob#:#mob_external_url#:#Externe URL
+mob#:#mob_choose_from_pool#:#Aus Medienpool
+mob#:#mob_url#:#URL
+mob#:#mob_url_info#:#External resource URL, e.g. Youtube or Vimeo URL.
+adn#:#administrative_notification#:#Ankündigung
+adn#:#administrative_notification_description#:#Bereitstellen systemweiter Ankündigungen in der Kopfzeile von ILIAS
+common#:#obj_adn#:#Ankündigungen
+adn#:#main#:#Ankündigungen
+adn#:#msg_title#:#Titel
+adn#:#msg_type#:#Wichtigkeit
+adn#:#msg_type_during_event#:#Während Ereignis
+adn#:#msg_type_1#:#Hinweis
+adn#:#msg_type_2#:#Wichtig
+adn#:#msg_type_3#:#Eilmeldung
+adn#:#msg_event_start#:#Beginn
+adn#:#msg_event_end#:#Ende
+adn#:#msg_display_start#:#Anzeige ab
+adn#:#msg_display_end#:#Anzeige bis
+adn#:#msg_permanent#:#Anzeige
+adn#:#msg_permanent_no#:#Zeitlich begrenzt
+adn#:#msg_permanent_yes#:#Permanent
+adn#:#msg_table_title#:#Ankündigungen
+adn#:#msg_body#:#Text
+adn#:#msg_event_date#:#Ereignis
+adn#:#msg_display_date#:#Anzeigedauer
+adn#:#msg_form_button_save#:#Sichern
+adn#:#msg_form_button_update#:#Aktualisieren
+adn#:#msg_form_button_cancel#:#Abbrechen
+adn#:#msg_form_button_delete#:#Löschen
+adn#:#msg_form_button_reset#:#Zurücksetzen
+adn#:#msg_form_title#:#Ankündigung erstellen
+adn#:#msg_success_created#:#Ankündigung erstellt.
+adn#:#msg_success_updated#:#Ankündigung aktualisiert.
+adn#:#msg_success_deleted#:#Ankündigung gelöscht.
+adn#:#msg_dismissable#:#Manuell schließen
+adn#:#msg_limit_to_roles#:#Rollen-abhängige Anzeige
+adn#:#msg_limited_to_role_ids#:#Rollen
+adn#:#msg_reset_dismiss#:#Für alle zurücksetzen
+adn#:#msg_limit_to_roles_info#:#Nur ausgewählte Rollen sehen die Ankündigung.
+adn#:#msg_dismissable_info#:#Benutzer können Ankündigung schließen und sehen diese künftig nicht mehr.
+adn#:#msg_form_button_updateAndStay#:#Sichern und bleiben
+adn#:#common_actions#:#Aktionen
+adn#:#common_add_msg#:#Ankündigung hinzufügen

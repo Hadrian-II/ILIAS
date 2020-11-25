@@ -456,12 +456,6 @@ class ilObjUserGUI extends ilObjectGUI
                 $userObj->setLanguage($_POST["language"]);
             }
 
-            // Set disk quota
-            if (ilDiskQuotaActivationChecker::_isActive()) {
-                // The disk quota is entered in megabytes but stored in bytes
-                $userObj->setPref("disk_quota", ilUtil::MB2Bytes($_POST["disk_quota"]));
-            }
-            
             if ($this->isSettingChangeable('skin_style')) {
                 //set user skin and style
                 $sknst = explode(":", $_POST["skin_style"]);
@@ -857,15 +851,6 @@ class ilObjUserGUI extends ilObjectGUI
                 $this->object->setLanguage($this->form_gui->getInput('language'));
             }
 
-            if (ilDiskQuotaActivationChecker::_isActive()) {
-                // set disk quota
-                $this->object->setPref("disk_quota", ilUtil::MB2Bytes($_POST["disk_quota"]));
-            }
-            if (ilDiskQuotaActivationChecker::_isPersonalWorkspaceActive()) {
-                // set personal workspace disk quota
-                $this->object->setPref("wsp_disk_quota", ilUtil::MB2Bytes($_POST["wsp_disk_quota"]));
-            }
-
             if ($this->isSettingChangeable('skin_style')) {
                 //set user skin and style
                 $sknst = explode(":", $_POST["skin_style"]);
@@ -988,33 +973,6 @@ class ilObjUserGUI extends ilObjectGUI
         $data["time_limit_until"] = $this->object->getTimeLimitUntil()
             ? new ilDateTime($this->object->getTimeLimitUntil(), IL_CAL_UNIX)
             : null;
-    
-        
-        // BEGIN DiskQuota, Show disk space used
-        if (ilDiskQuotaActivationChecker::_isActive()) {
-            $data["disk_quota"] = ilUtil::Bytes2MB($this->object->getDiskQuota());
-        }
-        if (ilDiskQuotaActivationChecker::_isPersonalWorkspaceActive()) {
-            $data["wsp_disk_quota"] = ilUtil::Bytes2MB($this->object->getPersonalWorkspaceDiskQuota());
-        }
-        // W. Randelshofer 2008-09-09: Deactivated display of disk space usage,
-        // because determining the disk space usage may take several minutes.
-        /*
-        require_once "Modules/File/classes/class.ilObjFileAccess.php";
-        require_once "Modules/HTMLLearningModule/classes/class.ilObjFileBasedLMAccess.php";
-        require_once "Modules/ScormAicc/classes/class.ilObjSAHSLearningModuleAccess.php";
-        require_once "Services/Mail/classes/class.ilObjMailAccess.php";
-        require_once "Modules/Forum/classes/class.ilObjForumAccess.php";
-        require_once "Modules/MediaCast/classes/class.ilObjMediaCastAccess.php";
-        $data["disk_space_used"] =
-            ilObjFileAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>'.
-            ilObjFileBasedLMAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>'.
-            ilObjSAHSLearningModuleAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>'.
-            ilObjMailAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>'.
-            ilObjForumAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>'.
-            ilObjMediaCastAccess::_getDiskSpaceUsedBy($this->object->getId(), true).'<br>';
-        */
-        // END DiskQuota, Show disk space used
 
         // personal data
         $data["gender"] = $this->object->getGender();
@@ -1230,138 +1188,6 @@ class ilObjUserGUI extends ilObjectGUI
         //		$this->form_gui->addItem($ac);
         $this->form_gui->addItem($radg);
 
-        if (ilDiskQuotaActivationChecker::_isActive()) {
-            $lng->loadLanguageModule("file");
-            
-            $quota_head = new ilFormSectionHeaderGUI();
-            $quota_head->setTitle($lng->txt("repository_disk_quota"));
-            $this->form_gui->addItem($quota_head);
-            
-            // disk quota
-            $disk_quota = new ilTextInputGUI($lng->txt("disk_quota"), "disk_quota");
-            $disk_quota->setSize(10);
-            $disk_quota->setMaxLength(11);
-            $disk_quota->setInfo($this->lng->txt("enter_in_mb_desc"));
-            $this->form_gui->addItem($disk_quota);
-
-            if ($a_mode == "edit") {
-                // show which disk quota is in effect, and explain why
-                $dq_info = ilDiskQuotaChecker::_lookupDiskQuota($this->object->getId());
-                if ($dq_info['user_disk_quota'] > $dq_info['role_disk_quota']) {
-                    $info_text = sprintf(
-                        $lng->txt('disk_quota_is_1_instead_of_2_by_3'),
-                        ilUtil::formatSize($dq_info['user_disk_quota'], 'short'),
-                        ilUtil::formatSize($dq_info['role_disk_quota'], 'short'),
-                        $dq_info['role_title']
-                    );
-                } elseif (is_infinite($dq_info['role_disk_quota'])) {
-                    $info_text = sprintf($lng->txt('disk_quota_is_unlimited_by_1'), $dq_info['role_title']);
-                } else {
-                    $info_text = sprintf(
-                        $lng->txt('disk_quota_is_1_by_2'),
-                        ilUtil::formatSize($dq_info['role_disk_quota'], 'short'),
-                        $dq_info['role_title']
-                    );
-                }
-                $disk_quota->setInfo($this->lng->txt("enter_in_mb_desc") . '<br>' . $info_text);
-
-
-                // disk usage
-                $du_info = ilDiskQuotaChecker::_lookupDiskUsage($this->object->getId());
-                $disk_usage = new ilNonEditableValueGUI($lng->txt("disk_usage"), "disk_usage");
-                if ($du_info['last_update'] === null) {
-                    $disk_usage->setValue($lng->txt('unknown'));
-                } else {
-                    $disk_usage->setValue(ilUtil::formatSize($du_info['disk_usage'], 'short'));
-                    $info = '<table class="il_user_quota_disk_usage_overview">';
-                    // write the count and size of each object type
-                    foreach ($du_info['details'] as $detail_data) {
-                        $info .= '<tr>' .
-                            '<td class="std">' . $detail_data['count'] . '</td>' .
-                            '<td class="std">' . $lng->txt($detail_data['type']) . '</td>' .
-                            '<td class="std">' . ilUtil::formatSize($detail_data['size'], 'short') . '</td>' .
-                            '</tr>'
-                            ;
-                    }
-                    $info .= '</table>';
-                    $info .= '<br>' . $this->lng->txt('last_update') . ': ' .
-                        ilDatePresentation::formatDate(new ilDateTime($du_info['last_update'], IL_CAL_DATETIME));
-                    $disk_usage->setInfo($info);
-                }
-                $this->form_gui->addItem($disk_usage);
-
-                // date when the last disk quota reminder was sent to the user
-                if (true || $dq_info['last_reminder']) {
-                    $reminder = new ilNonEditableValueGUI($lng->txt("disk_quota_last_reminder_sent"), "last_reminder");
-                    $reminder->setValue(
-                        ilDatePresentation::formatDate(new ilDateTime($dq_info['last_reminder'], IL_CAL_DATETIME))
-                    );
-                    $reminder->setInfo($this->lng->txt("disk_quota_last_reminder_sent_desc"));
-                    $this->form_gui->addItem($reminder);
-                }
-            }
-        }
-        
-        if (ilDiskQuotaActivationChecker::_isPersonalWorkspaceActive()) {
-            $lng->loadLanguageModule("file");
-        
-            $quota_head = new ilFormSectionHeaderGUI();
-            $quota_head->setTitle($lng->txt("personal_resources_disk_quota"));
-            $this->form_gui->addItem($quota_head);
-            
-            // personal workspace disk quota
-            $wsp_disk_quota = new ilTextInputGUI($lng->txt("disk_quota"), "wsp_disk_quota");
-            $wsp_disk_quota->setSize(10);
-            $wsp_disk_quota->setMaxLength(11);
-            $wsp_disk_quota->setInfo($this->lng->txt("enter_in_mb_desc"));
-            $this->form_gui->addItem($wsp_disk_quota);
-            
-            if ($a_mode == "edit") {
-                // show which disk quota is in effect, and explain why
-                $dq_info = ilDiskQuotaChecker::_lookupPersonalWorkspaceDiskQuota($this->object->getId());
-                if ($dq_info['user_wsp_disk_quota'] > $dq_info['role_wsp_disk_quota']) {
-                    $info_text = sprintf(
-                        $lng->txt('disk_quota_is_1_instead_of_2_by_3'),
-                        ilUtil::formatSize($dq_info['user_wsp_disk_quota'], 'short'),
-                        ilUtil::formatSize($dq_info['role_wsp_disk_quota'], 'short'),
-                        $dq_info['role_title']
-                    );
-                } elseif (is_infinite($dq_info['role_wsp_disk_quota'])) {
-                    $info_text = sprintf($lng->txt('disk_quota_is_unlimited_by_1'), $dq_info['role_title']);
-                } else {
-                    $info_text = sprintf(
-                        $lng->txt('disk_quota_is_1_by_2'),
-                        ilUtil::formatSize($dq_info['role_wsp_disk_quota'], 'short'),
-                        $dq_info['role_title']
-                    );
-                }
-                $wsp_disk_quota->setInfo($this->lng->txt("enter_in_mb_desc") . '<br>' . $info_text);
-            }
-            
-            // disk usage
-            include_once "Services/DiskQuota/classes/class.ilDiskQuotaHandler.php";
-            $du_info = ilDiskQuotaHandler::getFilesizeByTypeAndOwner($this->object->getId());
-            $disk_usage = new ilNonEditableValueGUI($lng->txt("disk_usage"), "disk_usage");
-            if (!sizeof($du_info)) {
-                $disk_usage->setValue($lng->txt('unknown'));
-            } else {
-                $disk_usage->setValue(ilUtil::formatSize(ilDiskQuotaHandler::getFilesizeByOwner($this->object->getId())));
-                $info = '<table class="il_user_quota_disk_usage_overview">';
-                // write the count and size of each object type
-                foreach ($du_info as $detail_data) {
-                    $info .= '<tr>' .
-                        '<td class="std">' . $detail_data['count'] . '</td>' .
-                        '<td class="std">' . $lng->txt("obj_" . $detail_data["src_type"]) . '</td>' .
-                        '<td class="std">' . ilUtil::formatSize($detail_data['filesize'], 'short') . '</td>' .
-                        '</tr>'
-                        ;
-                }
-                $info .= '</table>';
-                $disk_usage->setInfo($info);
-            }
-            $this->form_gui->addItem($disk_usage);
-        }
-         
         // personal data
         if (
             $this->isSettingChangeable('gender') or
@@ -1787,7 +1613,6 @@ class ilObjUserGUI extends ilObjectGUI
     }
 
 
-    // BEGIN DiskQuota: Allow administrators to edit user picture
     /**
     * upload user image
     *
@@ -1909,7 +1734,6 @@ class ilObjUserGUI extends ilObjectGUI
 
         $this->editObject();
     }
-    // END DiskQuota: Allow administrators to edit user picture
 
     /**
     * assign users to role
@@ -2018,116 +1842,9 @@ class ilObjUserGUI extends ilObjectGUI
         include_once("./Services/User/classes/class.ilRoleAssignmentTableGUI.php");
         $tab = new ilRoleAssignmentTableGUI($this, "roleassignment");
 
-        // now get roles depending on filter settings
-        $role_list = $rbacreview->getRolesByFilter($tab->filter["role_filter"], $this->object->getId());
-        $assigned_roles = $rbacreview->assignedRoles($this->object->getId());
-
-        $counter = 0;
-
-        include_once('./Services/AccessControl/classes/class.ilObjRole.php');
-        
-        $records = array();
-        foreach ($role_list as $role) {
-            // fetch context path of role
-            $rolf = $rbacreview->getFoldersAssignedToRole($role["obj_id"], true);
-
-            // only list roles that are not set to status "deleted"
-            if ($rbacreview->isDeleted($rolf[0])) {
-                continue;
-            }
-
-            // build context path
-            $path = "";
-
-            if ($this->tree->isInTree($rolf[0])) {
-                if ($rolf[0] == ROLE_FOLDER_ID) {
-                    $path = $this->lng->txt("global");
-                } else {
-                    $tmpPath = $this->tree->getPathFull($rolf[0]);
-
-                    // count -1, to exclude the role folder itself
-                    /*for ($i = 1; $i < (count($tmpPath)-1); $i++)
-                    {
-                        if ($path != "")
-                        {
-                            $path .= " > ";
-                        }
-
-                        $path .= $tmpPath[$i]["title"];
-                    }*/
-
-                    $path = $tmpPath[count($tmpPath) - 1]["title"];
-                }
-            } else {
-                $path = "<b>Rolefolder " . $rolf[0] . " not found in tree! (Role " . $role["obj_id"] . ")</b>";
-            }
-
-            $disabled = false;
-
-            // disable checkbox for system role for the system user
-            if (($this->object->getId() == SYSTEM_USER_ID and $role["obj_id"] == SYSTEM_ROLE_ID)
-                or (!in_array(SYSTEM_ROLE_ID, $rbacreview->assignedRoles($ilUser->getId())) and $role["obj_id"] == SYSTEM_ROLE_ID)) {
-                $disabled = true;
-            }
-            
-            // protected admin role
-            if ($role['obj_id'] == SYSTEM_ROLE_ID && !$rbacreview->isAssigned($ilUser->getId(), SYSTEM_ROLE_ID)) {
-                include_once './Services/PrivacySecurity/classes/class.ilSecuritySettings.php';
-                if (ilSecuritySettings::_getInstance()->isAdminRoleProtected()) {
-                    $disabled = true;
-                }
-            }
-
-            if (substr($role["title"], 0, 3) == "il_") {
-                if (!$assignable) {
-                    $rolf_arr = $rbacreview->getFoldersAssignedToRole($role["obj_id"], true);
-                    $rolf2 = $rolf_arr[0];
-                } else {
-                    $rolf2 = $rolf;
-                }
-
-                $parent_node = $this->tree->getNodeData($rolf2);
-
-                $role["description"] = $this->lng->txt("obj_" . $parent_node["type"]) . "&nbsp;(#" . $parent_node["obj_id"] . ")";
-            }
-
-            $role_ids[$counter] = $role["obj_id"];
-
-            $result_set[$counter][] = $checkbox = ilUtil::formCheckBox(in_array($role["obj_id"], $assigned_roles), "role_id[]", $role["obj_id"], $disabled) . "<input type=\"hidden\" name=\"role_id_ctrl[]\" value=\"" . $role["obj_id"] . "\"/>";
-            $this->ctrl->setParameterByClass("ilobjrolegui", "ref_id", $rolf[0]);
-            $this->ctrl->setParameterByClass("ilobjrolegui", "obj_id", $role["obj_id"]);
-            $result_set[$counter][] = $link = "<a href=\"" . $this->ctrl->getLinkTargetByClass("ilobjrolegui", "perm") . "\">" . ilObjRole::_getTranslation($role["title"]) . "</a>";
-            $title = ilObjRole::_getTranslation($role["title"]);
-            $result_set[$counter][] = $role["description"];
-
-            // Add link to objector local Rores
-            if ($role["role_type"] == "local") {
-                // Get Object to the role
-                $obj_id = $rbacreview->getObjectOfRole($role["rol_id"]);
-
-                $obj_type = ilObject::_lookupType($obj_id);
-
-                $ref_ids = ilObject::_getAllReferences($obj_id);
-
-                foreach ($ref_ids as $ref_id) {
-                }
-
-                require_once("./Services/Link/classes/class.ilLink.php");
-    
-                $result_set[$counter][] = $context = "<a href='" . ilLink::_getLink($ref_id, ilObject::_lookupType($obj_id)) . "' target='_top'>" . $path . "</a>";
-            } else {
-                $result_set[$counter][] = $path;
-                $context = $path;
-            }
-
-            $records[] = array("path" => $path, "description" => $role["description"],
-                "context" => $context, "checkbox" => $checkbox,
-                "role" => $link, "title" => $title);
-            ++$counter;
-        }
 
         if (true) {
-            $tab->setData($records);
+            $tab->parse((int) $this->object->getId());
             $this->tpl->setVariable("ROLES_TABLE", $tab->getHTML());
             return;
         }
@@ -2346,7 +2063,7 @@ class ilObjUserGUI extends ilObjectGUI
         $body .= ($usr_lang->txt("reg_mail_body_text3") . "\n");
         $body .= $this->object->getProfileAsString($usr_lang);
 
-        $mmail->Subject($subject);
+        $mmail->Subject($subject, true);
         $mmail->Body($body);
         $mmail->Send();
 

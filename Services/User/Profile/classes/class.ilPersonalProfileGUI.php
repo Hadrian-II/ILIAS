@@ -11,6 +11,11 @@
  */
 class ilPersonalProfileGUI
 {
+    /**
+     * @var ilAppEventHandler
+     */
+    private $eventHandler;
+
     public $tpl;
 
     /**
@@ -31,6 +36,12 @@ class ilPersonalProfileGUI
     /** @var \ilTermsOfServiceDocumentEvaluation */
     protected $termsOfServiceEvaluation;
 
+    /** @var \ilTermsOfServiceHelper */
+    protected $termsOfServiceHelper;
+
+    /** @var ilErrorHandling */
+    protected $errorHandler;
+
     /**
      * @var ilProfileChecklistGUI
      */
@@ -47,11 +58,13 @@ class ilPersonalProfileGUI
     protected $checklist_status;
 
     /**
-    * constructor
+     * constructor
      * @param \ilTermsOfServiceDocumentEvaluation|null $termsOfServiceEvaluation
-    */
+     * @param ilTermsOfServiceHelper|null $termsOfServiceHelper
+     */
     public function __construct(
-        \ilTermsOfServiceDocumentEvaluation $termsOfServiceEvaluation = null
+        \ilTermsOfServiceDocumentEvaluation $termsOfServiceEvaluation = null,
+        \ilTermsOfServiceHelper $termsOfServiceHelper = null
     ) {
         global $DIC;
 
@@ -61,11 +74,17 @@ class ilPersonalProfileGUI
         $this->setting = $DIC->settings();
         $this->tpl = $DIC->ui()->mainTemplate();
         $this->ctrl = $DIC->ctrl();
+        $this->errorHandler = $DIC['ilErr'];
+        $this->eventHandler = $DIC['ilAppEventHandler'];
 
         if ($termsOfServiceEvaluation === null) {
             $termsOfServiceEvaluation = $DIC['tos.document.evaluator'];
         }
         $this->termsOfServiceEvaluation = $termsOfServiceEvaluation;
+        if ($termsOfServiceHelper === null) {
+            $termsOfServiceHelper = new ilTermsOfServiceHelper();
+        }
+        $this->termsOfServiceHelper = $termsOfServiceHelper;
 
         include_once './Services/User/classes/class.ilUserDefinedFields.php';
         $this->user_defined_fields = &ilUserDefinedFields::_getInstance();
@@ -95,7 +114,7 @@ class ilPersonalProfileGUI
         $tpl = $DIC['tpl'];
         $ilTabs = $DIC['ilTabs'];
         $lng = $DIC['lng'];
-        
+
         $next_class = $this->ctrl->getNextClass();
 
         switch ($next_class) {
@@ -527,7 +546,83 @@ class ilPersonalProfileGUI
         $this->tpl->setPermanentLink('usr', null, 'agreement');
         $this->tpl->printToStdout();
     }
-    
+
+    protected function showConsentWithdrawalConfirmation() : void
+    {
+        if (
+            !$this->user->getPref('consent_withdrawal_requested') ||
+            !$this->termsOfServiceHelper->isIncludedUser($this->user)
+        ) {
+            $this->errorHandler->raiseError($this->lng->txt('permission_denied'), $this->errorHandler->MESSAGE);
+        }
+
+        $this->tabs->clearTargets();
+        $this->tabs->clearSubTabs();
+        $this->tpl->setTitle($this->lng->txt('withdraw_consent'));
+
+        $tosWithdrawalGui = new ilTermsOfServiceWithdrawalGUIHelper($this->user);
+        $content = $tosWithdrawalGui->getConsentWithdrawalConfirmation($this);
+
+        $this->tpl->setContent($content);
+        $this->tpl->setPermanentLink('usr', null, 'agreement');
+        $this->tpl->printToStdout();
+    }
+
+    protected function cancelWithdrawal() : void
+    {
+        if (!$this->termsOfServiceHelper->isIncludedUser($this->user)) {
+            $this->errorHandler->raiseError($this->lng->txt('permission_denied'), $this->errorHandler->MESSAGE);
+        }
+
+        $this->user->deletePref('consent_withdrawal_requested');
+
+        if (ilSession::get('orig_request_target')) {
+            $target = ilSession::get('orig_request_target');
+            ilSession::set('orig_request_target', '');
+            $this->ctrl->redirectToUrl($target);
+        } else {
+            ilInitialisation::redirectToStartingPage();
+        }
+    }
+
+    protected function withdrawAcceptance() : void
+    {
+        if (
+            !$this->user->getPref('consent_withdrawal_requested') ||
+            !$this->termsOfServiceHelper->isIncludedUser($this->user)
+        ) {
+            $this->errorHandler->raiseError($this->lng->txt('permission_denied'), $this->errorHandler->MESSAGE);
+        }
+        $this->termsOfServiceHelper->resetAcceptance($this->user);
+
+        $defaultAuth = AUTH_LOCAL;
+        if ($this->setting->get('auth_mode')) {
+            $defaultAuth = $this->setting->get('auth_mode');
+        }
+
+        $withdrawalType = 0;
+        if (
+            $this->user->getAuthMode() == AUTH_LDAP ||
+            ($this->user->getAuthMode() === 'default' && $defaultAuth == AUTH_LDAP)
+        ) {
+            $withdrawalType = 2;
+        } elseif ((bool) $this->setting->get('tos_withdrawal_usr_deletion', false)) {
+            $withdrawalType = 1;
+        }
+
+        $domainEvent = new ilTermsOfServiceEventWithdrawn($this->user);
+        $this->eventHandler->raise(
+            'Services/TermsOfService',
+            'ilTermsOfServiceEventWithdrawn',
+            ['event' => $domainEvent]
+        );
+
+        ilSession::setClosingContext(ilSession::SESSION_CLOSE_USER);
+        $GLOBALS['DIC']['ilAuthSession']->logout();
+
+        $this->ctrl->redirectToUrl('login.php?tos_withdrawal_type=' . $withdrawalType . '&cmd=force_login');
+    }
+
     /**
      * Add location fields to form if activated
      *

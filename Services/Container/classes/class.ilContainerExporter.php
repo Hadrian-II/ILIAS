@@ -95,6 +95,19 @@ class ilContainerExporter extends ilXmlExporter
             "entity" => "common",
             "ids" => $a_ids);
 
+        // skill profiles
+        $res[] = array(
+            "component" => "Services/Skill",
+            "entity" => "skl_local_prof",
+            "ids" => $a_ids);
+
+        // news settings
+        $res[] = [
+            "component" => "Services/News",
+            "entity" => "news_settings",
+            "ids" => $a_ids
+        ];
+
         return $res;
     }
     

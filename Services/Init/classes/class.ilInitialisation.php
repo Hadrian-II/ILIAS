@@ -3,13 +3,21 @@
 
 // TODO:
 use ILIAS\BackgroundTasks\Dependencies\DependencyMap\BaseDependencyMap;
+use ILIAS\DI\Container;
 use ILIAS\Filesystem\Provider\FilesystemFactory;
 use ILIAS\Filesystem\Security\Sanitizing\FilenameSanitizerImpl;
+use ILIAS\FileUpload\Location;
 use ILIAS\FileUpload\Processor\BlacklistExtensionPreProcessor;
 use ILIAS\FileUpload\Processor\FilenameSanitizerPreProcessor;
 use ILIAS\FileUpload\Processor\PreProcessorManagerImpl;
 use ILIAS\FileUpload\Processor\VirusScannerPreProcessor;
 use ILIAS\GlobalScreen\Services;
+use ILIAS\ResourceStorage\Information\Repository\InformationARRepository;
+use ILIAS\ResourceStorage\Resource\Repository\ResourceARRepository;
+use ILIAS\ResourceStorage\Revision\Repository\RevisionARRepository;
+use ILIAS\ResourceStorage\StorageHandler\FileSystemStorageHandler;
+use ILIAS\ResourceStorage\Stakeholder\Repository\StakeholderARRepository;
+use ILIAS\ResourceStorage\Lock\LockHandlerilDB;
 
 require_once("libs/composer/vendor/autoload.php");
 
@@ -170,16 +178,41 @@ class ilInitialisation
                 define("IL_VIRUS_SCAN_COMMAND", $ilIliasIniFile->readVariable("tools", "scancommand"));
                 define("IL_VIRUS_CLEAN_COMMAND", $ilIliasIniFile->readVariable("tools", "cleancommand"));
                 break;
+            case "icap":
+                define("IL_VIRUS_SCANNER", "icap");
+                define("IL_ICAP_HOST", $ilIliasIniFile->readVariable("tools", "i_cap_host"));
+                define("IL_ICAP_PORT", $ilIliasIniFile->readVariable("tools", "i_cap_port"));
+                define("IL_ICAP_AV_COMMAND", $ilIliasIniFile->readVariable("tools", "i_cap_av_command"));
+                define("IL_ICAP_CLIENT", $ilIliasIniFile->readVariable("tools", "i_cap_client"));
+                break;
 
             default:
                 define("IL_VIRUS_SCANNER", "None");
                 break;
         }
+        define("IL_VIRUS_CLEAN_COMMAND", '');
 
         include_once './Services/Calendar/classes/class.ilTimeZone.php';
         $tz = ilTimeZone::initDefaultTimeZone($ilIliasIniFile);
         define("IL_TIMEZONE", $tz);
     }
+
+    protected static function initResourceStorage() : void
+    {
+        global $DIC;
+
+        $DIC['resource_storage'] = static function (Container $c) : \ILIAS\ResourceStorage\Services {
+            return new \ILIAS\ResourceStorage\Services(
+                new FileSystemStorageHandler($c['filesystem.storage'], Location::STORAGE),
+                new RevisionARRepository(),
+                new ResourceARRepository(),
+                new InformationARRepository(),
+                new StakeholderARRepository(),
+                new LockHandlerilDB($c->database())
+            );
+        };
+    }
+
 
     /**
      * Bootstraps the ILIAS filesystem abstraction.
@@ -287,7 +320,7 @@ class ilInitialisation
 
         $dic['upload'] = function (\ILIAS\DI\Container $c) {
             $fileUploadImpl = new \ILIAS\FileUpload\FileUploadImpl($c['upload.processor-manager'], $c['filesystem'], $c['http']);
-            if (IL_VIRUS_SCANNER != "None") {
+            if ((defined('IL_VIRUS_SCANNER') && IL_VIRUS_SCANNER != "None") || (defined('IL_SCANNER_TYPE') && IL_SCANNER_TYPE == "1")) {
                 $fileUploadImpl->register(new VirusScannerPreProcessor(ilVirusScannerFactory::_getInstance()));
             }
 
@@ -342,14 +375,7 @@ class ilInitialisation
             }
         }
 
-        $iliasHttpPath = implode('', [$protocol, $host, $uri]);
-        if (ilContext::getType() == ilContext::CONTEXT_APACHE_SSO) {
-            $iliasHttpPath = dirname($iliasHttpPath);
-        } elseif (ilContext::getType() === ilContext::CONTEXT_SAML) {
-            if (strpos($iliasHttpPath, '/Services/Saml/lib/') !== false && strpos($iliasHttpPath, '/metadata.php') === false) {
-                $iliasHttpPath = substr($iliasHttpPath, 0, strpos($iliasHttpPath, '/Services/Saml/lib/'));
-            }
-        }
+        $iliasHttpPath = ilContext::modifyHttpPath(implode('', [$protocol, $host, $uri]));
 
         $f = new \ILIAS\Data\Factory();
         $uri = $f->uri(ilUtil::removeTrailingPathSeparators($iliasHttpPath));
@@ -1168,6 +1194,8 @@ class ilInitialisation
         self::determineClient();
 
         self::bootstrapFilesystems();
+
+        self::initResourceStorage();
 
         self::initClientIniFile();
 

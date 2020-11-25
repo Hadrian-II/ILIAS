@@ -405,6 +405,10 @@ class ilPortfolioPageGUI extends ilPageObjectGUI
             return $this->createPersistentCertificateUrl($a_id, $userCertificateRepository, $url);
         }
 
+        if (!ilObject::_exists($a_id)) {
+            return $this->lng->txt('deleted');
+        }
+
         $class = "ilObj" . $objDefinition->getClassName($a_type) . "GUI";
         $verification = new $class($a_id, ilObject2GUI::WORKSPACE_OBJECT_ID);
 
@@ -1191,4 +1195,18 @@ class ilPortfolioPageGUI extends ilPageObjectGUI
 
         return '<div><a href="' . $url . '">' . $caption . '</a></div>';
     }
+
+    /**
+     * @return string
+     */
+    public function getCommentsHTMLExport()
+    {
+        $notes_gui = new ilNoteGUI($this->portfolio_id,
+            $this->getPageObject()->getId(), "pfpg");
+        $notes_gui->enablePublicNotes(true);
+        $notes_gui->setRepositoryMode(false);
+        $notes_gui->setExportMode();
+        return  $notes_gui->getNotesHTML();
+    }
+
 }

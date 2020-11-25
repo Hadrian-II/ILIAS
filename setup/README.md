@@ -1,12 +1,19 @@
 # Use the Command Line to Manage ILIAS
 
-The ILIAS command line app can be called via `php setup\setup.php`. It contains three
-commands to manage ILIAS installations:
+The ILIAS command line app can be called via `php setup\setup.php`. It contains four
+main commands to manage ILIAS installations:
 
 * `install` will [set an installation up](#install-ilias)
 * `update` will [update an installation](#update-ilias)
+* `status` will [report status of an installation](#report-status-of-ilias)
 * `build-artifacts` [recreates static assets](#build-ilias-artifacts) of an installation
-* `reload-control-structure` [rebuilds structure information](#build-ilias-artifacts) of an installation
+* `reload-control-structure` [rebuilds structure information](#reload-ilias-control-structure) of an installation
+
+`install` and `update` also supply switches and options for a granular control of the inclusion of plugins:
+
+* `--skip <plugin name>` will exclude the named plugin from the command
+* `--no-plugins` will exclude all plugins from the command
+* `install <plugin name>` (or `update <plugin name>` respectively) will update or install the specified plugin
 
 `install` and `update` both require a [configuration file](#about-the-config-file)
 to do their job. The app also supports a `help` command that lists arguments and
@@ -15,7 +22,7 @@ options of the available commands.
 
 ## Install ILIAS
 
-To install ILIAS from the command line, call `php setup/setup.php install config.json"
+To install ILIAS with all plugins from the command line, call `php setup/setup.php install config.json`
 from within the ILIAS folder you checked out from GitHub (or downloaded from elsewhere).
 `config.json` can be the path to some [configuration file](#about-the-config-file)
 which does not need to reside in the ILIAS folder. Also, `setup/setup.php` could be
@@ -30,30 +37,58 @@ you will have to type `yes` (or `no`, of course). These checks can be overwritte
 with the `--yes` option, which confirm any assumption for you automatically.
 
 There might be cases where the setup aborts for some reasons. These reasons might
-require further actions on your side which the setup can not perform. Make sure you
+require further actions on your side which the setup cannot perform. Make sure you
 read messages from the setup carefully and act accordingly. If you do not change the
 config file, it is safe to execute the installation process a second time for the
 same installation a during the initial setup process.
 
 Do not discard the `config.json` you use for the installation, you will need it later
 on to update that installation. If you want to overwrite specific fields in the
-configuration file you can use the `--config="a.b.c=value"` option, even several
-times. The nested field `a.b.c` from the config file will then be overwritten with
-`value`.
+configuration file you can use the `--config="<path>=<value>"` option, even several
+times. If you e.g. use `--config="database.password=XYZ"` the field `database.password`
+from the original config will be overwritten with `XYZ`. This allows to use one
+configuration for multiple setups and overwrite it from the CLI or even share
+configs without secrets.
+
+The setup will also install plugins of the installation, unless the plugin explicitely
+defines that it cannot be installed via CLI setup. If you still want to skip a plugin
+for installation, use the skip-option: `php setup/setup.php install --skip <plugin name> config.json`.
+The option can be repeated to cover multiple plugins. If you want to skip plugins
+alltogether, use the `--no-plugins` option. If you only want to install a specific
+plugin, use `php setup/setup.php install config.json <plugin name>`.
 
 
 ## Update ILIAS
 
 To update ILIAS from the command line, call `php setup/setup.php update config.json`
-from within your ILIAS folder. Make sure you use the same config to update your
-installation as you have used for the [installation](#install-ilias). The remarks
-for the [installation](#install-ilias) in this README also apply for the update.
+from within your ILIAS folder. This will update the configuration of ILIAS according
+to the provided configuration as well as update the database of the installation or
+do other necessary task for the update. This does not update the source code.
+
+Plugins are updated just as the core of ILIAS (if the plugin does not exclude itself),
+where the plugins can be controlled with the same options as for `install`.
 
 Sometimes it might happen that the database update steps detect some edge case
 or warn about a possible loss of data. In this case the update is aborted with
-a message and can be resumed after the messages was read carefully and acted
+a message and can be resumed after the messages were read carefully and acted
 upon. You may use the `--ignore-db-update-messages` at your own risk if you want
 to silence the messages.
+
+## Report Status of ILIAS
+
+Via `php setup/setup.php status` you can get a status of your ILIAS installation.
+The command uses a best effort approach, so according to the status of your
+system the output might contain more or less fields. When calling this for a
+system where ILIAS was not installed, for example, the output only contains the
+information that ilias is not installed. The command also reports on the configuration
+of the installation.
+
+The output of the command is formatted as YAML to be easily readable by people and
+machines. So we encourage you to use this command for monitoring your system and
+also request status information via our feature process that you are interested in.
+
+Like for `install` and `update`, plugins are included here, but can be controlled
+via options.
 
 
 ## Build ILIAS Artifacts
@@ -65,6 +100,9 @@ filesystem permissions later on, because the webserver will need to access the
 generated files. Please do not invoke this function unless it is explicitly stated
 in update or patch instructions or you know what you are doing.
 
+Like for `install` and `update`, plugins are included here, but can be controlled
+via options.
+
 
 ## Reload ILIAS Control Structure
 
@@ -73,16 +111,14 @@ in the database. Sometimes it might be necessary to refresh that information.
 Please do not invoke this function unless it is explicitly stated in update
 or patch instructions or you know what you are doing.
 
-
 ## About the Config File
 
 The config file is a json file with the following structure. **Mandatory fields
-are printed bold**, all other fields might be ommitted. A minimal example is
+are printed bold**, all other fields might be omitted. A minimal example is
 [here](minimal-config.json).
 
 * **common** settings relevant for the complete installation 
   * **client_id** is the identifier to be used for the installation 
-  * **master_password** is used to identify at the web version of the setup
   * *server_timezone* where the installation resides, given as `region/city`,
     e.g. `Europe/Berlin`. Defaults to `UTC`.
   * *register_nic* sends the identification number of the installation to a server
@@ -137,7 +173,7 @@ are printed bold**, all other fields might be ommitted. A minimal example is
   * *path_to_lessc* to compile less to css
 * **systemfolder** settings for Module/SystemFolder
   * *client* information
-    * *name* of the ILIASinstallation
+    * *name* of the ILIAS installation
     * *description* of the installation
     * *institution* that provides the installation
   * **contact** to a person behind the installation
@@ -157,10 +193,37 @@ are printed bold**, all other fields might be ommitted. A minimal example is
   * *path_to_zip*" to zip files
   * *path_to_unzip*" to unzip files
 * *virusscanner* configuration
-  * *virusscanner* to be used. Either `none`, `sophos`, `antivir` or `clamav`
+  * *virusscanner* to be used. Either `none`, `sophos`, `antivir`, `clamav` or `icap`
   * *path_to_scan* command of the scanner
   * *path_to_clean* command of the scanner
-
-
-
- 
+  * *icap_host* host address of the icap scanner
+  * *icap_port* port if the icap scanner
+  * *icap_service_name* service name of the icap scanner
+  * *icap_client_path* path to the `c-icap-client`, if this is left empty, a php client will be used
+* *privacysecurity*
+  * *https_enabled* forces https on login page
+* *webservices*
+  * *soap_user_administration* enable administration per soap
+  * *soap_wsdl_path* path to the ilias wsdl file, default is 'http://<your server>/webservice/soap/server.php?wsdl
+  * *soap_connect_timeout* maximum time in seconds until a connection attempt to the SOAP-Webservice is interrupted
+  * *rpc_server_host* Java-Server host (if set `rpc_server_port` must be set too)
+  * *rpc_server_port* Java-Server port (if set `rpc_server_host` must be set too)
+* *chatroom* see also [Chat Server Setup](/Modules/Chatroom/README.md)
+  * *address* IP-Address/FQN of Chat Server
+  * *port* of the chat server, possible value from `1` to `65535` 
+  * *sub_directory* http(s)://[IP/Domain]/[SUB_DIRECTORY]
+  * *https* adding this enables https
+    * *cert* absolute server path to the SSL certificate file e.g. `/etc/ssl/certs/server.pem`
+    * *key* absolute server path to the private key file e.g. `/etc/ssl/private/server.key`
+    * *dhparam* absolute server path to a file e.g. `/etc/ssl/private/dhparam.pem`
+  * *log* absolute server path to the chat server's log file e.g. `/var/www/ilias/data/chat.log`
+  * *log_level* possible values are `emerg`, `alert`, `crit` `error`, `warning`, `notice`, `info`, `debug`, `silly`
+  * *error_log* absolute server path to the chat server's error log file e.g. `/var/www/ilias/data/chat_error.log`
+  * *ilias_proxy* ILIAS to Server Connection
+    * *ilias_url* URL for the Server connection
+  * *client_proxy* Client to Server Connection
+    * *client_url* URL for the Server connection
+  * *deletion_interval*
+    * *deletion_unit* possible values are `days`, `weeks`, `months`, `years`
+    * *deletion_value* depending on `deletion_unit` possible values are `days max 31`, `weeks max 52`, `months max 12`, `years no max`
+    * *deletion_time* with format `HH:MM e.g. 23:30`

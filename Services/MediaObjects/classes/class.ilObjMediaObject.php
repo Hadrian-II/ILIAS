@@ -300,16 +300,16 @@ class ilObjMediaObject extends ilObject
      * get item for media purpose
      *
      * @param string $a_purpose
-     * @return ilMediaItem
+     * @return ilMediaItem|null
      */
-    public function &getMediaItem($a_purpose)
+    public function getMediaItem($a_purpose): ?ilMediaItem
     {
         foreach ($this->media_items as $media_item) {
             if ($media_item->getPurpose() == $a_purpose) {
                 return $media_item;
             }
         }
-        return false;
+        return null;
     }
 
 
@@ -477,10 +477,11 @@ class ilObjMediaObject extends ilObject
             $this->updateMetaData();
         }
         
-        ilMediaItem::deleteAllItemsOfMob($this->getId());
-
         // iterate all items
         $media_items = $this->getMediaItems();
+
+        ilMediaItem::deleteAllItemsOfMob($this->getId());
+
         $j = 1;
         foreach ($media_items as $key => $val) {
             $item = $media_items[$key];
@@ -534,14 +535,6 @@ class ilObjMediaObject extends ilObject
         // but this would lead to "quota-breaches" when the pool item is deleted
         // and "suddenly" all workspace owners get filesize added to their
         // respective quotas, regardless of current status
-        
-        include_once "Services/DiskQuota/classes/class.ilDiskQuotaHandler.php";
-        ilDiskQuotaHandler::handleUpdatedSourceObject(
-            $a_mob->getType(),
-            $a_mob->getId(),
-            ilUtil::dirSize($a_mob->getDataDirectory()),
-            $parent_obj_ids
-        );
     }
 
     /**
@@ -1579,40 +1572,9 @@ class ilObjMediaObject extends ilObject
         return array("width" => $width, "height" => $height, "info" => $info);
     }
 
-    /**
-    * Get simple mime types that deactivate parameter property
-    * files tab in ILIAS
-    */
-    public static function _getSimpleMimeTypes()
-    {
-        return array("image/x-ms-bmp", "image/gif", "image/jpeg", "image/x-portable-bitmap",
-            "image/png", "image/psd", "image/tiff", "application/pdf");
-    }
-    
     public function getDataDirectory()
     {
         return ilUtil::getWebspaceDir() . "/mobs/mm_" . $this->getId();
-    }
-
-    /**
-    * Check whether only autostart parameter should be supported (instead
-    * of parameters input field.
-    *
-    * This should be the same behaviour as mp3/flv in page.xsl
-    */
-    public static function _useAutoStartParameterOnly($a_loc, $a_format)
-    {
-        $lpath = pathinfo($a_loc);
-        if ($lpath["extension"] == "mp3" && $a_format == "audio/mpeg") {
-            return true;
-        }
-        if ($lpath["extension"] == "flv") {
-            return true;
-        }
-        if (in_array($a_format, array("video/mp4", "video/webm"))) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -1937,20 +1899,57 @@ class ilObjMediaObject extends ilObject
      * @param
      * @return
      */
-    public function generatePreviewPic($a_width, $a_height)
+    public function generatePreviewPic($a_width, $a_height, $sec = 1)
     {
         $item = $this->getMediaItem("Standard");
 
-        if ($item->getLocationType() == "LocalFile" &&
-            is_int(strpos($item->getFormat(), "image/"))) {
-            $dir = ilObjMediaObject::_getDirectory($this->getId());
-            $file = $dir . "/" .
-                $item->getLocation();
-            if (is_file($file)) {
-                if (ilUtil::isConvertVersionAtLeast("6.3.8-3")) {
-                    ilUtil::execConvert(ilUtil::escapeShellArg($file) . "[0] -geometry " . $a_width . "x" . $a_height . "^ -gravity center -extent " . $a_width . "x" . $a_height . " PNG:" . $dir . "/mob_vpreview.png");
-                } else {
-                    ilUtil::convertImage($file, $dir . "/mob_vpreview.png", "PNG", $a_width . "x" . $a_height);
+        if ($item->getLocationType() == "LocalFile") {
+            if (is_int(strpos($item->getFormat(), "image/"))) {
+                $dir = ilObjMediaObject::_getDirectory($this->getId());
+                $file = $dir . "/" .
+                    $item->getLocation();
+                if (is_file($file)) {
+                    if (ilUtil::isConvertVersionAtLeast("6.3.8-3")) {
+                        ilUtil::execConvert(
+                            ilUtil::escapeShellArg(
+                                $file
+                            ) . "[0] -geometry " . $a_width . "x" . $a_height . "^ -gravity center -extent " . $a_width . "x" . $a_height . " PNG:" . $dir . "/mob_vpreview.png"
+                        );
+                    } else {
+                        ilUtil::convertImage($file, $dir . "/mob_vpreview.png", "PNG", $a_width . "x" . $a_height);
+                    }
+                }
+            }
+
+            if (is_int(strpos($item->getFormat(), "video/"))) {
+                try {
+                    if ($sec < 0) {
+                        $sec = 0;
+                    }
+                    if ($this->getVideoPreviewPic() != "") {
+                        $this->removeAdditionalFile($this->getVideoPreviewPic(true));
+                    }
+                    include_once("./Services/MediaObjects/classes/class.ilFFmpeg.php");
+                    $med = $this->getMediaItem("Standard");
+                    $mob_file = ilObjMediaObject::_getDirectory($this->getId()) . "/" . $med->getLocation();
+                    ilFFmpeg::extractImage(
+                        $mob_file,
+                        "mob_vpreview.png",
+                        ilObjMediaObject::_getDirectory($this->getId()),
+                        $sec
+                    );
+                } catch (ilException $e) {
+                    $ret = ilFFmpeg::getLastReturnValues();
+
+                    $message = '';
+                    if (is_array($ret) && count($ret) > 0) {
+                        $message = "\n" . implode("\n", $ret);
+                    }
+
+                    /** @var ilLogger $logger */
+                    $logger = $GLOBALS['DIC']->logger()->mob();
+                    $logger->warning($e->getMessage() . $message);
+                    $logger->logStack(ilLogLevel::WARNING);
                 }
             }
         }
